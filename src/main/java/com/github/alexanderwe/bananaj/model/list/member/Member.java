@@ -50,9 +50,9 @@ public class Member extends MailchimpObject{
 
 	public Member(MailChimpList mailChimpList, JSONObject member) {
         super(member.getString("id"), member);
-    	final JSONObject memberMergeTags = member.getJSONObject("merge_fields");
-    	final JSONObject memberStats = member.getJSONObject("stats");
-    	final JSONObject interests = member.getJSONObject("interests");
+    	final JSONObject memberMergeTags = member.optJSONObject("merge_fields");
+    	final JSONObject memberStats = member.optJSONObject("stats");
+    	final JSONObject interests = member.optJSONObject("interests");
 
     	HashMap<String, String> merge_fields = new HashMap<String, String>();
     	if (memberMergeTags != null) {
@@ -260,24 +260,30 @@ public class Member extends MailchimpObject{
 	 * @throws Exception
 	 */
 	private void setMemberActivities(String unique_email_id, String listID) throws Exception{
-		List<MemberActivity> activities = new ArrayList<MemberActivity>();
+		List<MemberActivity> activities = new ArrayList<>();
 
 		final JSONObject activity = new JSONObject(this.getConnection().do_Get(new URL("https://"+this.mailChimpList.getConnection().getServer()+".api.mailchimp.com/3.0/lists/"+this.mailChimpList.getId()+"/members/"+this.getId()+"/activity"),connection.getApikey()));
-		final JSONArray activityArray = activity.getJSONArray("activity");
+		final JSONArray activityArray = activity.optJSONArray("activity");
 
-		for (int i = 0 ; i < activityArray.length();i++)
-		{
-			try{
-				final JSONObject activityDetail = activityArray.getJSONObject(i);
-				MemberActivity memberActivity = new MemberActivity(this.unique_email_id, this.mailChimpList.getId(), activityDetail.getString("action"),activityDetail.getString("timestamp"), activityDetail.getString("campaign_id"), activityDetail.getString("title"));
-				activities.add(memberActivity);
-			} catch (JSONException jsone){
-				final JSONObject activityDetail = activityArray.getJSONObject(i);
-				MemberActivity memberActivity = new MemberActivity(this.unique_email_id, this.mailChimpList.getId(), activityDetail.getString("action"),activityDetail.getString("timestamp"), activityDetail.getString("campaign_id"));
-				activities.add(memberActivity);
-			}
+        if (activityArray != null) {
+            for (int i = 0; i < activityArray.length(); i++) {
+                try {
+                    final JSONObject activityDetail = activityArray.getJSONObject(i);
+                    MemberActivity   memberActivity = new MemberActivity(this.unique_email_id,
+                            this.mailChimpList.getId(), activityDetail.getString("action"),
+                            activityDetail.getString("timestamp"), activityDetail.getString("campaign_id"),
+                            activityDetail.getString("title"));
+                    activities.add(memberActivity);
+                } catch (JSONException jsone) {
+                    final JSONObject activityDetail = activityArray.getJSONObject(i);
+                    MemberActivity   memberActivity = new MemberActivity(this.unique_email_id,
+                            this.mailChimpList.getId(), activityDetail.getString("action"),
+                            activityDetail.getString("timestamp"), activityDetail.getString("campaign_id"));
+                    activities.add(memberActivity);
+                }
 
-		}
+            }
+        }
 
 		this.memberActivities = activities;
 	}
