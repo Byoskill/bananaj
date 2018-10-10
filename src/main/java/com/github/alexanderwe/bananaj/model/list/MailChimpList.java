@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.json.JSONArray;
@@ -154,6 +155,39 @@ public class MailChimpList extends MailchimpObject {
         getConnection().do_Post(new URL(connection.getListendpoint()+"/"+this.getId()+"/members"),member.toString(),connection.getApikey());
         this.membercount++;
 	}
+	
+	/**
+     * Add a member to a mailing list for a specific interest.
+     * 
+     * @param status the status
+     * @param emailAddress the email address
+     * @param merge_fields_values the  member details
+     * @param interestID the interest ID
+     * @throws Exception
+     */
+    public void addMemberForInterest(MemberStatus status, String emailAddress, Map<String, Object> merge_fields_values,
+            String interestID) throws Exception {
+        
+        URL url = new URL(getConnection().getListendpoint() + "/" + this.getId() + "/members");
+
+        JSONObject member = new JSONObject();
+        JSONObject merge_fields = new JSONObject();
+
+        Iterator<Entry<String, Object>> it = merge_fields_values.entrySet().iterator();
+        while (it.hasNext()) {
+            Entry<String, Object> pair = it.next();
+            it.remove(); // avoids a ConcurrentModificationException
+            merge_fields.put(pair.getKey(), pair.getValue());
+        }
+
+        member.put("status", status.getStringRepresentation());
+        member.put("email_address", emailAddress);
+        member.put("merge_fields", merge_fields);
+        member.put("interests", interestID);
+        getConnection().do_Post(url, member.toString(), getConnection().getApikey());
+
+        this.membercount++;
+    }
 	
 	public Member updateMember(Member member) throws Exception {
 		JSONObject json = new JSONObject();
