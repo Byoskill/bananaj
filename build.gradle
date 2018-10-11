@@ -99,7 +99,7 @@ bintray {
     publications = ['mavenJava']
 	pkg {
 		repo = 'maven'
-		name = 'spring-cqrs-module'
+		name = 'bananaj'
 		userOrg = user
 		licenses = ['Apache-2.0']
 		vcsUrl = 'https://github.com/Byoskill/bananaj.git'
