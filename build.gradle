@@ -3,7 +3,7 @@ apply plugin: "maven"
 apply plugin: "maven-publish"
 apply plugin: 'signing'
 
-group = 'com.github.alexanderwe'
+group = 'com.github.byoskill'
 version = '0.5.1'
 
 description = 'A simple MailChimp API wrapper written in Java'
