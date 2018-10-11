@@ -1,10 +1,12 @@
+plugins {
+    id "com.jfrog.bintray" version "1.8.4"
+}
 apply plugin: "java"
 apply plugin: "maven"
 apply plugin: "maven-publish"
 apply plugin: 'signing'
 
-group = 'com.github.byoskill'
-version = '0.5.1'
+
 
 description = 'A simple MailChimp API wrapper written in Java'
 
@@ -88,6 +90,27 @@ publishing {
             }
         }
     }
+}
+
+
+bintray {
+ 	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['mavenJava']
+	pkg {
+		repo = 'maven'
+		name = 'spring-cqrs-module'
+		userOrg = user
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://github.com/Byoskill/bananaj.git'
+		labels = ['mailchimp', 'api', 'java']
+		publicDownloadNumbers = true
+		version {
+			name = project.version
+			desc = 'Simple api for accessing Mailchimp - Work in progess'
+			released  = new Date()			
+		}
+	}
 }
 
 signing {
