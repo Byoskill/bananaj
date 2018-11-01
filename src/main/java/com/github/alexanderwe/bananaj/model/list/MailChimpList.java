@@ -614,12 +614,22 @@ public class MailChimpList extends MailchimpObject {
 			final JSONObject mergeFieldOptionsJSON = mergeFieldDetail.getJSONObject("options");
 			MergeFieldOptions mergeFieldOptions = new MergeFieldOptions();
 
+
 			switch(mergeFieldDetail.getString("type")){
 				case "address":mergeFieldOptions.setDefault_country(mergeFieldOptionsJSON.getInt("default_country"));break;
-				case "phone":mergeFieldOptions.setPhone_format(mergeFieldOptionsJSON.getString("phone_format"));break;
-				case "date":mergeFieldOptions.setDate_format(mergeFieldOptionsJSON.getString("date_format"));break;
-				case "birthday":mergeFieldOptions.setDate_format(mergeFieldOptionsJSON.getString("date_format"));break;
-				case "text":mergeFieldOptions.setSize(mergeFieldOptionsJSON.getInt("size"));break;
+				case "phone": 
+				    if (!mergeFieldOptionsJSON.isNull("phone_format")) 
+				        mergeFieldOptions.setPhone_format(mergeFieldOptionsJSON.getString("phone_format"));
+				    break;				
+				case "date": 
+                    if (!mergeFieldOptionsJSON.isNull("date_format"))
+                        mergeFieldOptions.setDate_format(mergeFieldOptionsJSON.getString("date_format"));
+                    break;
+				case "birthday": 
+                    if (!mergeFieldOptionsJSON.isNull("date_format"))
+                        mergeFieldOptions.setDate_format(mergeFieldOptionsJSON.getString("date_format"));
+                    break;
+				case "text":mergeFieldOptions.setSize(mergeFieldOptionsJSON.getInt("size"));break;				
 				case "radio":
 					JSONArray mergeFieldOptionChoicesRadio = mergeFieldOptionsJSON.getJSONArray("choices");
 					ArrayList<String> choicesRadio = new ArrayList<String>();
