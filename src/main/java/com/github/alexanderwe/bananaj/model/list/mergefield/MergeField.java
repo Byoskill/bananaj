@@ -138,15 +138,11 @@ public class MergeField extends MailchimpObject {
     }
 
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
     @Override
-    public String toString(){
-        return "ID: " + super.getId() + System.lineSeparator() +
-                "Type: " + this.type + System.lineSeparator() +
-                "Tag: " + this.tag + System.lineSeparator() +
-                "Options: " + this.mergeFieldOptions;
+    public String toString() {
+        return "MergeField [id=" + id + ", tag=" + tag + ", name=" + name + ", type=" + type + ", isRequired="
+                + isRequired + ", default_value=" + default_value + ", isPublic=" + isPublic + ", listId=" + listId
+                + ", mergeFieldOptions=" + mergeFieldOptions + "]";
     }
 
 }

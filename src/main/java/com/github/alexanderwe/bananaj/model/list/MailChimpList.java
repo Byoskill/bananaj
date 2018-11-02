@@ -296,7 +296,7 @@ public class MailChimpList extends MailchimpObject {
      * @param merge_fields_values the merge fields values
      * @throws Exception the exception
      */
-    public void addMember(MemberStatus status, String emailAddress, HashMap<String, Object> merge_fields_values)
+    public void addMember(MemberStatus status, String emailAddress, Map<String, Object> merge_fields_values)
             throws Exception {
         URL                             url          = new URL(
                 connection.getListendpoint() + "/" + this.getId() + "/members");
