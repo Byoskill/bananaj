@@ -5,10 +5,9 @@ import org.apache.commons.codec.binary.Base64;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-// TODO: Auto-generated Javadoc
+
 /**
- * Class for util method for files.
- * Created by alexanderweiss on 30.12.16.
+ * Class for util method for files. Created by alexanderweiss on 30.12.16.
  */
 public class FileInspector {
 
@@ -18,7 +17,7 @@ public class FileInspector {
     /**
      * Instantiates a new file inspector.
      */
-    protected FileInspector () {
+    protected FileInspector() {
 
     }
 
@@ -27,8 +26,8 @@ public class FileInspector {
      *
      * @return single instance of FileInspector
      */
-    public static FileInspector getInstance(){
-        if(instance == null){
+    public static FileInspector getInstance() {
+        if (instance == null) {
             instance = new FileInspector();
         }
         return instance;
@@ -40,15 +39,15 @@ public class FileInspector {
      * @param file the file
      * @return the extension
      */
-    public String getExtension(File file){
+    public String getExtension(File file) {
         String extension = "";
 
-        int i = file.getName().lastIndexOf('.');
+        int    i         = file.getName().lastIndexOf('.');
         if (i >= 0) {
-            extension = file.getName().substring(i+1);
+            extension = file.getName().substring(i + 1);
         }
 
-        return "."+extension;
+        return "." + extension;
     }
 
     /**
@@ -57,11 +56,11 @@ public class FileInspector {
      * @param file the file
      * @return the string
      */
-    public String encodeFileToBase64Binary(File file){
+    public String encodeFileToBase64Binary(File file) {
         byte[] encodedBytes = null;
         try {
             encodedBytes = Base64.encodeBase64(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

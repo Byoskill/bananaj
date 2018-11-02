@@ -1,5 +1,7 @@
 package com.github.alexanderwe.bananaj.model.campaign;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
@@ -11,22 +13,20 @@ import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 public class CampaignRecipients {
 
     /** The list id. */
-    private String list_id;
-    
+    private String              list_id;
+
     /** The segment opts. */
     private CampaignSegmentOpts segment_opts;
 
     /**
      * Used when created a Condition locally with the Builder class.
      *
-     * @param b the b
-     * @throws ConditionException the condition exception
+     * @param b the builder
      * @see Builder
      */
-
-    public CampaignRecipients(Builder b) throws ConditionException{
-    	this.segment_opts = b.segment_opts;
-    	this.list_id = b.list_id;
+    public CampaignRecipients(Builder b) {
+        this.segment_opts = b.segment_opts;
+        this.list_id      = b.list_id;
     }
 
     /**
@@ -52,34 +52,37 @@ public class CampaignRecipients {
      *
      * @return the json representation
      */
-    public JSONObject getJsonRepresentation(){
+    public JSONObject getJsonRepresentation() {
         JSONObject recipents = new JSONObject();
-        
+
         recipents.put("list_id", getListId());
         if (getSegmentOpts() != null) {
-        	recipents.put("segment_opts", getSegmentOpts().getJsonRepresentation());
+            recipents.put("segment_opts", getSegmentOpts().getJsonRepresentation());
         }
 
         return recipents;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
+    @Nullable
     @Override
     public String toString() {
-        return  "List ID: " + getListId() + System.lineSeparator() +
-                "Segment opts: " + getSegmentOpts().toString();
+        return "List ID: " + getListId() + System.lineSeparator() +
+                "Segment opts: " + getSegmentOpts();
     }
 
     /**
      * The Class Builder.
      */
     public static class Builder {
-        
+
         /** The list id. */
-        private String list_id;
-        
+        private String              list_id;
+
         /** The segment opts. */
         private CampaignSegmentOpts segment_opts;
 
@@ -106,17 +109,12 @@ public class CampaignRecipients {
         }
 
         /**
-         * Builds the.
+         * Builds the campaign recipient.
          *
          * @return the campaign recipients
          */
         public CampaignRecipients build() {
-            try {
-                return new CampaignRecipients(this);
-            } catch (ConditionException e) {
-                e.printStackTrace();
-            }
-            return null;
+            return new CampaignRecipients(this);
         }
     }
 

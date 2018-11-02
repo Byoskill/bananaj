@@ -258,10 +258,10 @@ public class Campaign extends MailchimpObject {
 	 * @throws Exception the exception
 	 */
 	private void setContent() throws Exception{
-		JSONObject content = new JSONObject(getConnection().do_Get(new URL(connection.getCampaignendpoint()+"/"+this.getId()+"/content"),connection.getApikey()));
+		JSONObject jsonContentFromCall = new JSONObject(getConnection().do_Get(new URL(connection.getCampaignendpoint()+"/"+this.getId()+"/content"),connection.getApikey()));
 		this.content = new CampaignContent(
-				content.has("plain_text") ? content.getString("plain_text") : null, 
-				content.has("html") ? content.getString("html") : null, 
+				jsonContentFromCall.has("plain_text") ? jsonContentFromCall.getString("plain_text") : null, 
+				jsonContentFromCall.has("html") ? jsonContentFromCall.getString("html") : null, 
 				this) ;
 	}
 

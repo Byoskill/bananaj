@@ -17,11 +17,11 @@ import com.github.alexanderwe.bananaj.model.list.segment.MatchType;
 public class CampaignSegmentOpts {
 
     /** The saved segment id. */
-    private Integer saved_segment_id;
-    
+    private Integer                 saved_segment_id;
+
     /** The match. */
-    private MatchType match;
-    
+    private MatchType               match;
+
     /** The conditions. */
     private List<AbstractCondition> conditions;
 
@@ -29,14 +29,13 @@ public class CampaignSegmentOpts {
      * Used when created a Condition locally with the Builder class.
      *
      * @param b the b
-     * @throws ConditionException the condition exception
      * @see Builder
      */
 
-    public CampaignSegmentOpts(Builder b) throws ConditionException{
-    	this.saved_segment_id = b.saved_segment_id;
-    	this.match = b.match;
-    	this.conditions = b.conditions;
+    public CampaignSegmentOpts(Builder b) {
+        this.saved_segment_id = b.saved_segment_id;
+        this.match            = b.match;
+        this.conditions       = b.conditions;
     }
 
     /**
@@ -48,21 +47,21 @@ public class CampaignSegmentOpts {
         return saved_segment_id;
     }
 
-	/**
-	 * Gets the match.
-	 *
-	 * @return the match
-	 */
-	public MatchType getMatch() {
-		return match;
-	}
+    /**
+     * Gets the match.
+     *
+     * @return the match
+     */
+    public MatchType getMatch() {
+        return match;
+    }
 
-	/**
-	 * Gets the conditions.
-	 *
-	 * @return the conditions
-	 */
-	public List<AbstractCondition> getConditions() {
+    /**
+     * Gets the conditions.
+     *
+     * @return the conditions
+     */
+    public List<AbstractCondition> getConditions() {
         return conditions;
     }
 
@@ -71,50 +70,52 @@ public class CampaignSegmentOpts {
      *
      * @return the json representation
      */
-    public JSONObject getJsonRepresentation(){
+    public JSONObject getJsonRepresentation() {
         JSONObject segmentOpts = new JSONObject();
 
         if (getSavedSegmentId() != null) {
-        	segmentOpts.put("saved_segment_id", getSavedSegmentId());
+            segmentOpts.put("saved_segment_id", getSavedSegmentId());
         }
 
         if (getMatch() != null) {
-        	segmentOpts.put("match", getMatch().value());
+            segmentOpts.put("match", getMatch().value());
         }
-        
+
         if (getConditions() != null) {
-        	JSONArray jsonConditions = new JSONArray();
-        	Iterator<AbstractCondition> i = getConditions().iterator();
-        	while (i.hasNext()) {
-        		jsonConditions.put(i.next());
-        	}
-        	segmentOpts.put("conditions", jsonConditions);
+            JSONArray                   jsonConditions = new JSONArray();
+            Iterator<AbstractCondition> i              = getConditions().iterator();
+            while (i.hasNext()) {
+                jsonConditions.put(i.next());
+            }
+            segmentOpts.put("conditions", jsonConditions);
         }
-        
+
         return segmentOpts;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "Saved Segment ID: " + getSavedSegmentId() + System.lineSeparator() +
-        		"Match: " + getMatch().toString()  + System.lineSeparator() + 
-                "Conditions: " + getConditions().toString() +  System.lineSeparator();
+                "Match: " + getMatch() + System.lineSeparator() +
+                "Conditions: " + getConditions() + System.lineSeparator();
     }
 
     /**
      * The Class Builder.
      */
     public static class Builder {
-        
+
         /** The saved segment id. */
-        private Integer saved_segment_id;
-        
+        private Integer                 saved_segment_id;
+
         /** The match. */
-        private MatchType match;
-        
+        private MatchType               match;
+
         /** The conditions. */
         private List<AbstractCondition> conditions;
 
@@ -146,7 +147,7 @@ public class CampaignSegmentOpts {
          * @param conditions the conditions
          * @return the builder
          */
-        public Builder conditions( List<AbstractCondition> conditions) {
+        public Builder conditions(List<AbstractCondition> conditions) {
             this.conditions = conditions;
             return this;
         }
@@ -157,12 +158,7 @@ public class CampaignSegmentOpts {
          * @return the campaign segment opts
          */
         public CampaignSegmentOpts build() {
-            try {
-                return new CampaignSegmentOpts(this);
-            } catch (ConditionException e) {
-                e.printStackTrace();
-            }
-            return null;
+            return new CampaignSegmentOpts(this);
         }
     }
 

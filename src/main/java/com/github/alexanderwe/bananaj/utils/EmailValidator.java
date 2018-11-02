@@ -3,7 +3,6 @@ package com.github.alexanderwe.bananaj.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: Auto-generated Javadoc
 /**
  * Validator for E-Mail addresses. Replacement for deprecated apache commons EmailValidator.
  * Created by alexanderweiss on 27.12.16.

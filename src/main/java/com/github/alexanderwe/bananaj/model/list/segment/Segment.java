@@ -90,7 +90,7 @@ public class Segment extends MailchimpObject {
      * @throws Exception the exception
      */
     public void addMember(Member member) throws Exception{
-        if (!this.getType().equals(SegmentType.STATIC)){
+        if (!SegmentType.STATIC.equals(this.getType())){
             throw new SegmentException();
         }
         getConnection().do_Post(new URL(connection.getListendpoint()+"/"+this.getList_id()+"/segments/"+this.getId()+"/members"),member.getJSONRepresentation().toString(),connection.getApikey());
@@ -146,7 +146,7 @@ public class Segment extends MailchimpObject {
      * @throws Exception the exception
      */
     public void removeMember(Member member) throws Exception{
-        if (!this.getType().equals(SegmentType.STATIC)){
+        if (!SegmentType.STATIC.equals(this.getType())){
             throw new SegmentException();
         }
         getConnection().do_Delete(new URL(connection.getListendpoint()+"/"+this.getList_id()+"/segments/"+this.getId()+"/members/"+member.getId()),connection.getApikey());
