@@ -4,18 +4,33 @@
  */
 package com.github.alexanderwe.bananaj.model.template;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum TemplateType.
+ */
 public enum TemplateType {
 
 
-		USER("user"),BASE("base"),GALLERY("gallery");
+		/** The user. */
+		USER("user"),/** The base. */
+BASE("base"),/** The gallery. */
+GALLERY("gallery");
 		
+		/** The string representation. */
 		private String stringRepresentation;
 		
+		/**
+		 * Instantiates a new template type.
+		 *
+		 * @param stringRepresentation the string representation
+		 */
 		TemplateType(String stringRepresentation ){
 			setStringRepresentation(stringRepresentation);
 		}
 
 		/**
+		 * Gets the string representation.
+		 *
 		 * @return the stringRepresentation
 		 */
 		public String getStringRepresentation() {
@@ -23,6 +38,8 @@ public enum TemplateType {
 		}
 
 		/**
+		 * Sets the string representation.
+		 *
 		 * @param stringRepresentation the stringRepresentation to set
 		 */
 		private void setStringRepresentation(String stringRepresentation) {

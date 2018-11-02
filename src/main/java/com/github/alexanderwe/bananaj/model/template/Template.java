@@ -13,16 +13,44 @@ import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
 import com.github.alexanderwe.bananaj.model.MailchimpObject;
 import com.github.alexanderwe.bananaj.utils.DateConverter;
 
+/**
+ * The Class Template.
+ */
 public class Template extends MailchimpObject  {
 
+	/** The template name. */
 	private String templateName;
+	
+	/** The template type. */
 	private TemplateType templateType;
+	
+	/** The share url. */
 	private String shareUrl;
+	
+	/** The date created. */
 	private LocalDateTime dateCreated;
+	
+	/** The folder id. */
 	private String folder_id;
+	
+	/** The connection. */
 	private MailChimpConnection connection;
+	
+	/** The html. */
 	private String html;
 	
+	/**
+	 * Instantiates a new template.
+	 *
+	 * @param id the id
+	 * @param templateName the template name
+	 * @param templateType the template type
+	 * @param shareUrl the share url
+	 * @param dateCreated the date created
+	 * @param folder_id the folder id
+	 * @param connection the connection
+	 * @param jsonRepresentation the json representation
+	 */
 	public Template(int id, String templateName, TemplateType templateType, String shareUrl, LocalDateTime dateCreated, String folder_id, MailChimpConnection connection, JSONObject jsonRepresentation) {
 		super(String.valueOf(id),jsonRepresentation);
 		this.templateName = templateName;
@@ -33,6 +61,12 @@ public class Template extends MailchimpObject  {
 		this.connection = connection;
 	}
 
+	/**
+	 * Instantiates a new template.
+	 *
+	 * @param connection the connection
+	 * @param jsonTemplate the json template
+	 */
 	public Template(MailChimpConnection connection, JSONObject jsonTemplate) {
 		super(String.valueOf(jsonTemplate.getInt("id")), jsonTemplate);
 		this.templateName = jsonTemplate.getString("name");
@@ -43,6 +77,11 @@ public class Template extends MailchimpObject  {
 		this.connection = connection;
 	}
 	
+	/**
+	 * Instantiates a new template.
+	 *
+	 * @param b the b
+	 */
 	public Template(Builder b){
 		this.templateName = b.templateName;
 		this.folder_id = b.folder_id;
@@ -51,9 +90,10 @@ public class Template extends MailchimpObject  {
 
 
 	/**
-	 * Change the name of this template
-	 * @param name
-	 * @throws Exception
+	 * Change the name of this template.
+	 *
+	 * @param name the name
+	 * @throws Exception the exception
 	 */
 	public void changeName(String name) throws Exception{
 		JSONObject changedTemplate = new JSONObject();
@@ -63,9 +103,10 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
-	 * Change the html content of this template
-	 * @param html
-	 * @throws Exception
+	 * Change the html content of this template.
+	 *
+	 * @param html the html
+	 * @throws Exception the exception
 	 */
 	public void changeHTML(String html) throws Exception{
 		JSONObject changedTemplate = new JSONObject();
@@ -74,9 +115,10 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
-	 * Change the folder of this template
-	 * @param folder_id
-	 * @throws Exception
+	 * Change the folder of this template.
+	 *
+	 * @param folder_id the folder id
+	 * @throws Exception the exception
 	 */
 	public void changeFolder(String folder_id) throws Exception{
 		JSONObject changedTemplate = new JSONObject();
@@ -87,8 +129,10 @@ public class Template extends MailchimpObject  {
 
 	/**
 	 * Overwrite this template with a new one
-	 * Sets new name, content, and folder
-	 * @param template
+	 * Sets new name, content, and folder.
+	 *
+	 * @param template the template
+	 * @throws Exception the exception
 	 */
 	public void overwrite(Template template) throws Exception{
 		JSONObject changedTemplate = new JSONObject();
@@ -102,6 +146,8 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the template type.
+	 *
 	 * @return the templateType
 	 */
 	public TemplateType getTemplateType() {
@@ -109,6 +155,8 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the template name.
+	 *
 	 * @return the templateName
 	 */
 	public String getTemplateName() {
@@ -116,6 +164,8 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the share url.
+	 *
 	 * @return the shareUrl
 	 */
 	public String getShareUrl() {
@@ -123,6 +173,8 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the date created.
+	 *
 	 * @return the dateCreated
 	 */
 	public LocalDateTime getDateCreated() {
@@ -130,6 +182,8 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the folder id.
+	 *
 	 * @return the folder ID the template is currently in
 	 */
 	public String getFolder_id() {
@@ -137,6 +191,8 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the html.
+	 *
 	 * @return the html content of this template. Is not set, when template is received from MailChimp servers
 	 */
 	public String getHtml() {
@@ -144,12 +200,17 @@ public class Template extends MailchimpObject  {
 	}
 
 	/**
+	 * Gets the connection.
+	 *
 	 * @return the com.github.alexanderwe.bananaj.connection to MailChimp
 	 */
 	public MailChimpConnection getConnection() {
 		return connection;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		return "Name: " + this.getId() + "-" + this.getTemplateName() + System.lineSeparator() +
@@ -158,27 +219,59 @@ public class Template extends MailchimpObject  {
 				"Date created: " + this.getDateCreated() + System.lineSeparator();
 	}
 
+	/**
+	 * The Class Builder.
+	 */
 	public static class Builder {
+		
+		/** The template name. */
 		private String templateName;
+		
+		/** The folder id. */
 		private String folder_id;
+		
+		/** The html. */
 		private String html;
 
+		/**
+		 * With name.
+		 *
+		 * @param name the name
+		 * @return the template. builder
+		 */
 		public Template.Builder withName(String name) {
 			this.templateName = name;
 			return this;
 		}
 
+		/**
+		 * In folder.
+		 *
+		 * @param folder_id the folder id
+		 * @return the template. builder
+		 */
 		public Template.Builder inFolder(String folder_id) {
 			this.folder_id = folder_id;
 			return this;
 		}
 
+		/**
+		 * With HTML.
+		 *
+		 * @param html the html
+		 * @return the template. builder
+		 */
 		public Template.Builder withHTML(String html) {
 			this.html = html;
 			return this;
 		}
 
 
+		/**
+		 * Builds the.
+		 *
+		 * @return the template
+		 */
 		public Template build() {
 			return new Template(this);
 		}

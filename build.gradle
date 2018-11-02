@@ -26,6 +26,8 @@ dependencies {
     compile group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
     compile group: 'org.json', name: 'json', version: '20180130'
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    
 }
 
 task javadocJar(type: Jar) {

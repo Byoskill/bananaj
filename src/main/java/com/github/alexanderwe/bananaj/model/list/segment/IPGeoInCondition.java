@@ -5,23 +5,39 @@ import org.json.JSONObject;
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 import com.github.alexanderwe.bananaj.model.list.segment.StringCondition.Builder;
 
+// TODO: Auto-generated Javadoc
 /**
- * Segment option condition condition_type for "IPGeoIn"
+ * Segment option condition condition_type for "IPGeoIn".
  */
 public class IPGeoInCondition implements AbstractCondition {
 
+	/** The condition type. */
 	private ConditionType condition_type;
+    
+    /** The op. */
     private Operator op;
+    
+    /** The field. */
     private String field;
+    
+    /** The lng. */
     private String lng;
+    
+    /** The lat. */
     private String lat;
+    
+    /** The value. */
     private Integer value;
+    
+    /** The addr. */
     private String addr;
 
     /**
-     * Used when created a Condition locally with the Builder class
+     * Used when created a Condition locally with the Builder class.
+     *
+     * @param b the b
+     * @throws ConditionException the condition exception
      * @see Builder
-     * @param b
      */
 
     public IPGeoInCondition(Builder b) throws ConditionException {
@@ -54,34 +70,72 @@ public class IPGeoInCondition implements AbstractCondition {
     	this.addr = b.addr;
     }
 
+	/**
+	 * Gets the condition type.
+	 *
+	 * @return the condition type
+	 */
 	public ConditionType getConditionType() {
 		return condition_type;
 	}
 
+    /**
+     * Gets the field.
+     *
+     * @return the field
+     */
     public String getField() {
         return field;
     }
 
+    /**
+     * Gets the op.
+     *
+     * @return the op
+     */
     public Operator getOp() {
         return op;
     }
 
+    /**
+     * Gets the lng.
+     *
+     * @return the lng
+     */
     public String getLng() {
         return lng;
     }
 
+    /**
+     * Gets the value.
+     *
+     * @return the value
+     */
     public Integer getValue() {
         return value;
     }
 
+	/**
+	 * Gets the lat.
+	 *
+	 * @return the lat
+	 */
 	public String getLat() {
 		return lat;
 	}
 
+	/**
+	 * Gets the addr.
+	 *
+	 * @return the addr
+	 */
 	public String getAddr() {
 		return addr;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.alexanderwe.bananaj.model.list.segment.AbstractCondition#getJsonRepresentation()
+	 */
 	@Override
     public JSONObject getJsonRepresentation(){
         JSONObject condition = new JSONObject();
@@ -93,6 +147,9 @@ public class IPGeoInCondition implements AbstractCondition {
         return condition;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString(){
         return "ConditionType: " + getConditionType() + System.lineSeparator() +
@@ -104,50 +161,114 @@ public class IPGeoInCondition implements AbstractCondition {
                 "Addr: " + getAddr() + System.lineSeparator();
     }
 
+    /**
+     * The Class Builder.
+     */
     public static class Builder {
-    	private ConditionType condition_type;
+    	
+	    /** The condition type. */
+	    private ConditionType condition_type;
+        
+        /** The op. */
         private Operator op;
+        
+        /** The field. */
         private String field;
+        
+        /** The lng. */
         private String lng;
+        
+        /** The lat. */
         private String lat;
+        
+        /** The value. */
         private Integer value;
+        
+        /** The addr. */
         private String addr;
 
+        /**
+         * Condition type.
+         *
+         * @param condition_type the condition type
+         * @return the builder
+         */
         public Builder conditionType(ConditionType condition_type) {
             this.condition_type = condition_type;
             return this;
         }
 
+        /**
+         * Field.
+         *
+         * @param field the field
+         * @return the builder
+         */
         public Builder field(String field) {
             this.field = field;
             return this;
         }
 
+        /**
+         * Operator.
+         *
+         * @param op the op
+         * @return the builder
+         */
         public Builder operator(Operator op) {
             this.op = op;
             return this;
         }
 
+        /**
+         * Lng.
+         *
+         * @param lng the lng
+         * @return the builder
+         */
         public Builder lng(String lng) {
             this.lng = lng;
             return this;
         }
 
+        /**
+         * Lat.
+         *
+         * @param lat the lat
+         * @return the builder
+         */
         public Builder lat(String lat) {
             this.lat = lat;
             return this;
         }
 
+       /**
+        * Value.
+        *
+        * @param value the value
+        * @return the builder
+        */
        public Builder value(Integer value) {
             this.value = value;
             return this;
         }
 
+       /**
+        * Addr.
+        *
+        * @param addr the addr
+        * @return the builder
+        */
        public Builder addr(String addr) {
            this.addr = addr;
            return this;
        }
 
+        /**
+         * Builds the.
+         *
+         * @return the IP geo in condition
+         */
         public IPGeoInCondition build() {
             try {
                 return new IPGeoInCondition(this);

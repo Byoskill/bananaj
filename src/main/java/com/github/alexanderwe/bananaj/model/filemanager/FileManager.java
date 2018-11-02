@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
 import com.github.alexanderwe.bananaj.utils.FileInspector;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class for uploading and deleting files
  * Created by alexanderweiss on 06.02.16.
@@ -20,27 +21,35 @@ import com.github.alexanderwe.bananaj.utils.FileInspector;
 
 public class FileManager {
 
+    /** The connection. */
     private MailChimpConnection connection;
 
+    /**
+     * Instantiates a new file manager.
+     *
+     * @param connection the connection
+     */
     public FileManager(MailChimpConnection connection) {
        this.connection = connection;
     }
 
     /**
-     * Get file manager folders in mailchimp account account
+     * Get file manager folders in mailchimp account account.
+     *
      * @return List containing the first 100 folders
-     * @throws Exception
+     * @throws Exception the exception
      */
     public List<FileManagerFolder> getFileManagerFolders() throws Exception {
     	return getFileManagerFolders(100,0);
     }
 
     /**
-     * Get file manager folders in mailchimp account account with pagination
-	 * @param count Number of folders to return
-	 * @param offset Zero based offset
-     * @return
-     * @throws Exception
+     * Get file manager folders in mailchimp account account with pagination.
+     *
+     * @param count Number of folders to return
+     * @param offset Zero based offset
+     * @return the file manager folders
+     * @throws Exception the exception
      */
     public List<FileManagerFolder> getFileManagerFolders(int count, int offset) throws Exception {
         List<FileManagerFolder> fileManagerFolders = new ArrayList<FileManagerFolder>();
@@ -58,9 +67,11 @@ public class FileManager {
     }
     
     /**
-     * Get a specific file manager folder in mailchimp account account
-     * @return
-     * @throws Exception
+     * Get a specific file manager folder in mailchimp account account.
+     *
+     * @param id the id
+     * @return the file manager folder
+     * @throws Exception the exception
      */
     public FileManagerFolder getFileManagerFolder(int id) throws Exception {
         JSONObject jsonFileManagerFolder = new JSONObject(getConnection().do_Get(new URL(getConnection().getFilemanagerfolderendpoint()+"/"+id),connection.getApikey()));
@@ -68,10 +79,11 @@ public class FileManager {
     }
 
     /**
-     * Create a new folder
+     * Create a new folder.
+     *
      * @param name The name of the folder
-     * @return
-     * @throws Exception
+     * @return the file manager folder
+     * @throws Exception the exception
      */
     public FileManagerFolder createFileManagerFolder(String name) throws Exception {
         JSONObject newFolder  = new JSONObject();
@@ -81,20 +93,22 @@ public class FileManager {
     }
     
     /**
-     * Get files in your account
+     * Get files in your account.
+     *
      * @return List containing the first 100 files
-     * @throws Exception
+     * @throws Exception the exception
      */
     public List<FileManagerFile> getFileManagerFiles() throws Exception{
         return getFileManagerFiles(100,0);
     }
 
     /**
-     * Get files in your account with pagination
-	 * @param count Number of lists to return
-	 * @param offset Zero based offset
-     * @return
-     * @throws Exception
+     * Get files in your account with pagination.
+     *
+     * @param count Number of lists to return
+     * @param offset Zero based offset
+     * @return the file manager files
+     * @throws Exception the exception
      */
     public List<FileManagerFile> getFileManagerFiles(int count, int offset) throws Exception{
         List<FileManagerFile> files = new ArrayList<FileManagerFile>();
@@ -114,9 +128,11 @@ public class FileManager {
     }
 
     /**
-     * Get all files in your account
-     * @return
-     * @throws Exception
+     * Get all files in your account.
+     *
+     * @param id the id
+     * @return the file manager file
+     * @throws Exception the exception
      */
     public FileManagerFile getFileManagerFile(int id) throws Exception {
         // parse response
@@ -125,14 +141,15 @@ public class FileManager {
     }
 
     /**
-     * Upload a new file with folder id
+     * Upload a new file with folder id.
+     *
      * @param folder_id The id of the folder
      * @param filename The name of the file
-     * @param file
-     * @return
-     * @throws JSONException
-     * @throws MalformedURLException
-     * @throws Exception
+     * @param file the file
+     * @return the file manager file
+     * @throws JSONException the JSON exception
+     * @throws MalformedURLException the malformed URL exception
+     * @throws Exception the exception
      */
     public FileManagerFile upload(int folder_id, String filename, File file) throws JSONException, MalformedURLException, Exception{
     	String fExt = FileInspector.getInstance().getExtension(file);
@@ -146,13 +163,14 @@ public class FileManager {
     }
 
     /**
-     * Upload a new file without folder id
+     * Upload a new file without folder id.
+     *
      * @param filename The name of the file
-     * @param file
-     * @return
-     * @throws JSONException
-     * @throws MalformedURLException
-     * @throws Exception
+     * @param file the file
+     * @return the file manager file
+     * @throws JSONException the JSON exception
+     * @throws MalformedURLException the malformed URL exception
+     * @throws Exception the exception
      */
     public FileManagerFile upload(String filename, File file) throws JSONException, MalformedURLException, Exception{
     	String fExt = FileInspector.getInstance().getExtension(file);
@@ -165,14 +183,20 @@ public class FileManager {
     }
 
     /**
-     * Delete a file with specific fileID
-     * @param fileID
-     * @throws Exception
+     * Delete a file with specific fileID.
+     *
+     * @param fileID the file ID
+     * @throws Exception the exception
      */
     public void deleteFile(String fileID) throws Exception{
         connection.do_Delete(new URL(connection.getFilesendpoint()+"/"+fileID),connection.getApikey());
     }
 
+    /**
+     * Gets the connection.
+     *
+     * @return the connection
+     */
     public MailChimpConnection getConnection() {
         return connection;
     }

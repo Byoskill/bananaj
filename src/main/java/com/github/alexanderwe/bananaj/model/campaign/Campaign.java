@@ -22,22 +22,47 @@ import com.github.alexanderwe.bananaj.model.report.Report;
 import com.github.alexanderwe.bananaj.model.report.ReportListStats;
 import com.github.alexanderwe.bananaj.utils.DateConverter;
 
+// TODO: Auto-generated Javadoc
 /**
- * Class for representing a mailchimp campaign
- * @author alexanderweiss
+ * Class for representing a mailchimp campaign.
  *
+ * @author alexanderweiss
  */
 public class Campaign extends MailchimpObject {
 
+	/** The connection. */
 	private MailChimpConnection connection;
+	
+	/** The mail chimp list. */
 	private MailChimpList mailChimpList;
+	
+	/** The content. */
 	private CampaignContent content;
+	
+	/** The reportendpoint. */
 	private String REPORTENDPOINT;
+	
+	/** The campaign type. */
 	private CampaignType campaign_type;
+	
+	/** The campaign status. */
 	private CampaignStatus campaign_status;
+	
+	/** The campaign settings. */
 	private CampaignSettings campaignSettings;
 	
 	
+	/**
+	 * Instantiates a new campaign.
+	 *
+	 * @param id the id
+	 * @param mailChimpList the mail chimp list
+	 * @param campaign_type the campaign type
+	 * @param campaign_status the campaign status
+	 * @param campaignSettings the campaign settings
+	 * @param connection the connection
+	 * @param jsonRepresentation the json representation
+	 */
 	public Campaign(String id, MailChimpList mailChimpList, CampaignType campaign_type, CampaignStatus campaign_status, CampaignSettings campaignSettings, MailChimpConnection connection, JSONObject jsonRepresentation) {
 		super(id,jsonRepresentation);
 		this.connection = connection;
@@ -53,6 +78,13 @@ public class Campaign extends MailchimpObject {
 		}
 	}
 	
+	/**
+	 * Instantiates a new campaign.
+	 *
+	 * @param connection the connection
+	 * @param campaign the campaign
+	 * @throws Exception the exception
+	 */
 	public Campaign(MailChimpConnection connection, JSONObject campaign) throws Exception {
 		super(campaign.getString("id"), campaign);
 		this.connection = connection;
@@ -79,7 +111,10 @@ public class Campaign extends MailchimpObject {
 
 	/**
 	 * Replace the campaign settings with a new one.
-	 * @param campaignSettings
+	 *
+	 * @param campaignSettings the campaign settings
+	 * @throws CampaignSettingsException the campaign settings exception
+	 * @throws Exception the exception
 	 */
 	public void overwriteSettings (CampaignSettings campaignSettings) throws CampaignSettingsException, Exception {
 		campaignSettings.setCampaignId(this.getId());
@@ -97,14 +132,20 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
-	 * Send the campaign to the mailChimpList members
+	 * Send the campaign to the mailChimpList members.
+	 *
+	 * @throws Exception the exception
 	 */
 	public void send() throws Exception{
 		getConnection().do_Post(new URL(connection.getCampaignendpoint()+"/"+this.getId()+"/actions/send"),connection.getApikey());
 	}
 	
 	/**
-	 * Send the campaign to the mailChimpList members
+	 * Send the campaign to the mailChimpList members.
+	 *
+	 * @param emails the emails
+	 * @param type the type
+	 * @throws Exception the exception
 	 */
 	public void sendTestEmail(String[] emails, CampaignSendType type) throws Exception {
 		JSONObject data = new JSONObject();
@@ -119,16 +160,19 @@ public class Campaign extends MailchimpObject {
 	
 	/**
 	 * Stops the sending of your campaign
-	 * (!Only included in mailchimp pro)
+	 * (!Only included in mailchimp pro).
+	 *
+	 * @throws Exception the exception
 	 */
 	public void cancelSend() throws Exception{
 		getConnection().do_Post(new URL(connection.getCampaignendpoint()+"/"+this.getId()+"/actions/cancel-send"),connection.getApikey());
 	}
 
 	/**
-	 * Get the report of this campaign
-	 * @return
-	 * @throws Exception
+	 * Get the report of this campaign.
+	 *
+	 * @return the report
+	 * @throws Exception the exception
 	 */
 	public Report getReport() throws Exception{
 
@@ -155,6 +199,8 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
+	 * Gets the connection.
+	 *
 	 * @return the com.github.alexanderwe.bananaj.connection
 	 */
 	public MailChimpConnection getConnection() {
@@ -162,6 +208,8 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
+	 * Gets the reportendpoint.
+	 *
 	 * @return the REPORTSENDPOINT
 	 */
 	public String getREPORTENDPOINT() {
@@ -169,6 +217,8 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
+	 * Gets the campaign type.
+	 *
 	 * @return the campaign_type
 	 */
 	public CampaignType getCampaign_type() {
@@ -176,6 +226,8 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
+	 * Gets the campaign status.
+	 *
 	 * @return the campaign_status
 	 */
 	public CampaignStatus getCampaign_status() {
@@ -183,6 +235,8 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
+	 * Gets the mail chimp list.
+	 *
 	 * @return the mailChimpList
 	 */
 	public MailChimpList getMailChimpList() {
@@ -190,6 +244,8 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
+	 * Gets the content.
+	 *
 	 * @return the content
 	 */
 	public CampaignContent getContent() {
@@ -197,7 +253,9 @@ public class Campaign extends MailchimpObject {
 	}
 
 	/**
-	 * Set the content of this campaign
+	 * Set the content of this campaign.
+	 *
+	 * @throws Exception the exception
 	 */
 	private void setContent() throws Exception{
 		JSONObject content = new JSONObject(getConnection().do_Get(new URL(connection.getCampaignendpoint()+"/"+this.getId()+"/content"),connection.getApikey()));
@@ -207,10 +265,18 @@ public class Campaign extends MailchimpObject {
 				this) ;
 	}
 
+	/**
+	 * Gets the campaign settings.
+	 *
+	 * @return the campaign settings
+	 */
 	public CampaignSettings getCampaignSettings() {
 		return campaignSettings;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		return "ID: " + this.getId() + System.lineSeparator() +

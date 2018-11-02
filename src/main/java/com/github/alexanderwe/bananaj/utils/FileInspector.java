@@ -5,18 +5,28 @@ import org.apache.commons.codec.binary.Base64;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+// TODO: Auto-generated Javadoc
 /**
  * Class for util method for files.
  * Created by alexanderweiss on 30.12.16.
  */
 public class FileInspector {
 
+    /** The instance. */
     private static FileInspector instance = null;
 
+    /**
+     * Instantiates a new file inspector.
+     */
     protected FileInspector () {
 
     }
 
+    /**
+     * Gets the single instance of FileInspector.
+     *
+     * @return single instance of FileInspector
+     */
     public static FileInspector getInstance(){
         if(instance == null){
             instance = new FileInspector();
@@ -24,6 +34,12 @@ public class FileInspector {
         return instance;
     }
 
+    /**
+     * Gets the extension.
+     *
+     * @param file the file
+     * @return the extension
+     */
     public String getExtension(File file){
         String extension = "";
 
@@ -36,9 +52,10 @@ public class FileInspector {
     }
 
     /**
-     * Encode a file to base 64 binary
-     * @param file
-     * @return
+     * Encode a file to base 64 binary.
+     *
+     * @param file the file
+     * @return the string
      */
     public String encodeFileToBase64Binary(File file){
         byte[] encodedBytes = null;

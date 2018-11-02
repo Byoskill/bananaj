@@ -15,20 +15,50 @@ import com.github.alexanderwe.bananaj.model.MailchimpObject;
 import com.github.alexanderwe.bananaj.model.list.member.Member;
 import com.github.alexanderwe.bananaj.model.list.member.MemberStatus;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by alexanderweiss on 04.02.16.
  */
 public class Segment extends MailchimpObject {
 
+    /** The name. */
     private String name;
+    
+    /** The type. */
     private SegmentType type;
+    
+    /** The list id. */
     private String list_id;
+    
+    /** The created at. */
     private LocalDateTime created_at;
+    
+    /** The updated at. */
     private LocalDateTime updated_at;
+    
+    /** The member count. */
     private int member_count;
+    
+    /** The options. */
     private Options options;
+    
+    /** The connection. */
     private MailChimpConnection connection;
 
+    /**
+     * Instantiates a new segment.
+     *
+     * @param id the id
+     * @param name the name
+     * @param list_id the list id
+     * @param type the type
+     * @param created_at the created at
+     * @param updated_at the updated at
+     * @param member_count the member count
+     * @param options the options
+     * @param connection the connection
+     * @param jsonRepresentation the json representation
+     */
     public Segment(int id, String name, String list_id, SegmentType type, LocalDateTime created_at, LocalDateTime updated_at, int member_count, Options options, MailChimpConnection connection, JSONObject jsonRepresentation){
         super(String.valueOf(id), jsonRepresentation);
         this.name = name;
@@ -42,9 +72,10 @@ public class Segment extends MailchimpObject {
     }
 
     /**
-     * Used when created a Segment locally with the Builder class
+     * Used when created a Segment locally with the Builder class.
+     *
+     * @param b the b
      * @see Builder
-     * @param b
      */
     public Segment(Builder b){
         this.name = b.name;
@@ -53,9 +84,10 @@ public class Segment extends MailchimpObject {
     }
 
     /**
-     * Add a member to this segment, only STATIC segments allowed
-     * @param member
-     * @throws Exception
+     * Add a member to this segment, only STATIC segments allowed.
+     *
+     * @param member the member
+     * @throws Exception the exception
      */
     public void addMember(Member member) throws Exception{
         if (!this.getType().equals(SegmentType.STATIC)){
@@ -65,11 +97,12 @@ public class Segment extends MailchimpObject {
     }
 
     /**
-     * Get all members in this list
+     * Get all members in this list.
+     *
      * @param count x first members
      * @param offset skip x first members
-     * @return
-     * @throws Exception
+     * @return the members
+     * @throws Exception the exception
      */
     public ArrayList<Member> getMembers(int count, int offset) throws Exception{
 
@@ -107,9 +140,10 @@ public class Segment extends MailchimpObject {
     }
 
     /**
-     * Remove a member from this segment, only STATIC segments allowed
-     * @param member
-     * @throws Exception
+     * Remove a member from this segment, only STATIC segments allowed.
+     *
+     * @param member the member
+     * @throws Exception the exception
      */
     public void removeMember(Member member) throws Exception{
         if (!this.getType().equals(SegmentType.STATIC)){
@@ -119,47 +153,91 @@ public class Segment extends MailchimpObject {
     }
 
     /**
-     * Update a segment with a local segment
-     * @param updatedSegment
-     * @throws Exception
+     * Update a segment with a local segment.
+     *
+     * @param updatedSegment the updated segment
+     * @throws Exception the exception
      */
     public void update(Segment updatedSegment) throws Exception{
         getConnection().do_Patch(new URL(connection.getListendpoint()+"/"+this.getList_id()+"/segments/"+this.getId()),updatedSegment.getJSONRepresentation().toString(),connection.getApikey());
     }
 
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
     public SegmentType getType() {
         return type;
     }
 
+    /**
+     * Gets the list id.
+     *
+     * @return the list id
+     */
     public String getList_id() {
         return list_id;
     }
 
+    /**
+     * Gets the created at.
+     *
+     * @return the created at
+     */
     public LocalDateTime getCreated_at() {
         return created_at;
     }
 
+    /**
+     * Gets the updated at.
+     *
+     * @return the updated at
+     */
     public LocalDateTime getUpdated_at() {
         return updated_at;
     }
 
+    /**
+     * Gets the member count.
+     *
+     * @return the member count
+     */
     public int getMember_count() {
         return member_count;
     }
 
+    /**
+     * Gets the options.
+     *
+     * @return the options
+     */
     public Options getOptions() {
         return options;
     }
 
+    /**
+     * Gets the connection.
+     *
+     * @return the connection
+     */
     public MailChimpConnection getConnection() {
         return connection;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString(){
         return  "ID: " + this.getId() +  System.lineSeparator() +
@@ -172,23 +250,49 @@ public class Segment extends MailchimpObject {
                 "Options :" +this.getOptions() +  System.lineSeparator();
     }
 
+    /**
+     * The Class Builder.
+     */
     public static class Builder {
+        
+        /** The name. */
         private String name;
+        
+        /** The type. */
         private SegmentType type;
+        
+        /** The json representation. */
         private JSONObject jsonRepresentation = new JSONObject();
 
+        /**
+         * Name.
+         *
+         * @param s the s
+         * @return the builder
+         */
         public Builder name(String s) {
             this.name = s;
             jsonRepresentation.put("name", s);
             return this;
         }
 
+        /**
+         * Type.
+         *
+         * @param type the type
+         * @return the builder
+         */
         public Builder type(SegmentType type) {
             this.type = type;
             jsonRepresentation.put("type", type.value());
             return this;
         }
         
+        /**
+         * Builds the.
+         *
+         * @return the segment
+         */
         public Segment build() {
             return new Segment(this);
         }

@@ -5,24 +5,65 @@ import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 
+// TODO: Auto-generated Javadoc
 /**
- * Class for representing your mailchimp account
+ * Class for representing your mailchimp account.
  */
  public class Account extends MailchimpObject{
 
+	/** The connection. */
 	private MailChimpConnection connection;
+	
+	/** The api key. */
 	private String apiKey;
+	
+	/** The account name. */
 	private String account_name;
+	
+	/** The company. */
 	private String company;
+	
+	/** The address 1. */
 	private String address1;
+	
+	/** The address 2. */
 	private String address2;
+	
+	/** The city. */
 	private String city;
+	
+	/** The state. */
 	private String state;
+	
+	/** The zip. */
 	private String zip;
+	
+	/** The country. */
 	private String country;
+	
+	/** The last login. */
 	private LocalDateTime last_login;
+	
+	/** The subscriber count. */
 	private int subscriber_count;
 
+	/**
+	 * Instantiates a new account.
+	 *
+	 * @param connection the connection
+	 * @param id the id
+	 * @param account_name the account name
+	 * @param company the company
+	 * @param address1 the address 1
+	 * @param address2 the address 2
+	 * @param city the city
+	 * @param state the state
+	 * @param zip the zip
+	 * @param country the country
+	 * @param last_login the last login
+	 * @param subscriber_count the subscriber count
+	 * @param jsonrepresentation the jsonrepresentation
+	 */
 	public Account(MailChimpConnection connection, String id, String account_name, String company, String address1, String address2, String city, String state, String zip, String country, LocalDateTime last_login, int subscriber_count, JSONObject jsonrepresentation) {
 		super(id, jsonrepresentation);
 		this.connection = connection;
@@ -40,6 +81,8 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the connection.
+	 *
 	 * @return the com.github.alexanderwe.bananaj.connection
 	 */
 	public MailChimpConnection getConnection() {
@@ -47,6 +90,8 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the company.
+	 *
 	 * @return the company
 	 */
 	public String getCompany() {
@@ -54,6 +99,8 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the address 1.
+	 *
 	 * @return the address1
 	 */
 	public String getAddress1() {
@@ -61,6 +108,8 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the city.
+	 *
 	 * @return the city
 	 */
 	public String getCity() {
@@ -68,6 +117,8 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the state.
+	 *
 	 * @return the state
 	 */
 	public String getState() {
@@ -75,6 +126,8 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the zip.
+	 *
 	 * @return the zip
 	 */
 	public String getZip() {
@@ -83,6 +136,8 @@ import java.time.LocalDateTime;
 
 
 	/**
+	 * Gets the country.
+	 *
 	 * @return the country
 	 */
 	public String getCountry() {
@@ -90,28 +145,53 @@ import java.time.LocalDateTime;
 	}
 
 	/**
+	 * Gets the api key.
+	 *
 	 * @return the apiKey
 	 */
 	protected String getApiKey() {
 		return apiKey;
 	}
 
+	/**
+	 * Gets the address 2.
+	 *
+	 * @return the address 2
+	 */
 	public String getAddress2() {
 		return address2;
 	}
 
+	/**
+	 * Gets the last login.
+	 *
+	 * @return the last login
+	 */
 	public LocalDateTime getLast_login() {
 	return last_login;
 }
 
+	/**
+	 * Gets the account name.
+	 *
+	 * @return the account name
+	 */
 	public String getAccount_name() {
 		return account_name;
 	}
 
+	/**
+	 * Gets the subscriber count.
+	 *
+	 * @return the subscriber count
+	 */
 	public int getSubscriber_count() {
 		return subscriber_count;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		return this.company + System.lineSeparator() +

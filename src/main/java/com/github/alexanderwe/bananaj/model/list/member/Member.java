@@ -21,32 +21,71 @@ import com.github.alexanderwe.bananaj.model.MailchimpObject;
 import com.github.alexanderwe.bananaj.model.list.MailChimpList;
 import com.github.alexanderwe.bananaj.utils.EmailValidator;
 
+// TODO: Auto-generated Javadoc
 /**
- * Object for representing a mailchimp member
- * 
- * @author alexanderweiss
+ * Object for representing a mailchimp member.
  *
+ * @author alexanderweiss
  */
 public class Member extends MailchimpObject {
 
+    /** The mail chimp list. */
     private MailChimpList            mailChimpList;
+    
+    /** The merge fields. */
     private HashMap<String, String>  merge_fields;
+    
+    /** The unique email id. */
     private String                   unique_email_id;
+    
+    /** The email address. */
     private String                   email_address;
+    
+    /** The status if new. */
     private MemberStatus             status_if_new;
+    
+    /** The email type. */
     private EmailType                email_type;
+    
+    /** The status. */
     private MemberStatus             status;
+    
+    /** The timestamp signup. */
     private String                   timestamp_signup;
+    
+    /** The timestamp opt. */
     private String                   timestamp_opt;
+    
+    /** The ip signup. */
     private String                   ip_signup;
+    
+    /** The ip opt. */
     private String                   ip_opt;
+    
+    /** The avg open rate. */
     private double                   avg_open_rate;
+    
+    /** The avg click rate. */
     private double                   avg_click_rate;
+    
+    /** The last changed. */
     private String                   last_changed;
+    
+    /** The member activities. */
     private List<MemberActivity>     memberActivities;
+    
+    /** The member interest. */
     private HashMap<String, Boolean> memberInterest;
+    
+    /** The connection. */
     private MailChimpConnection      connection;
 
+    /**
+     * Instantiates a new member.
+     *
+     * @param mailChimpList the mail chimp list
+     * @param member the member
+     */
     public Member(MailChimpList mailChimpList, JSONObject member) {
         super(member.getString("id"), member);
         final JSONObject        memberMergeTags = member.optJSONObject("merge_fields");
@@ -97,6 +136,25 @@ public class Member extends MailchimpObject {
         this.connection       = mailChimpList.getConnection();
     }
 
+    /**
+     * Instantiates a new member.
+     *
+     * @param id the id
+     * @param mailChimpList the mail chimp list
+     * @param merge_fields the merge fields
+     * @param unique_email_id the unique email id
+     * @param email_address the email address
+     * @param status the status
+     * @param timestamp_signup the timestamp signup
+     * @param ip_signup the ip signup
+     * @param timestamp_opt the timestamp opt
+     * @param ip_opt the ip opt
+     * @param avg_open_rate the avg open rate
+     * @param avg_click_rate the avg click rate
+     * @param last_changed the last changed
+     * @param connection the connection
+     * @param jsonRepresentation the json representation
+     */
     public Member(String id, MailChimpList mailChimpList, HashMap<String, String> merge_fields, String unique_email_id,
             String email_address, MemberStatus status, String timestamp_signup, String ip_signup, String timestamp_opt,
             String ip_opt, double avg_open_rate, double avg_click_rate, String last_changed,
@@ -118,15 +176,18 @@ public class Member extends MailchimpObject {
         this.connection       = connection;
     }
 
+    /**
+     * Instantiates a new member.
+     */
     public Member() {
 
     }
 
     /**
-     * Update the mailChimpList of this member
-     * 
-     * @param listId
-     * @throws Exception
+     * Update the mailChimpList of this member.
+     *
+     * @param listId the list id
+     * @throws Exception the exception
      */
     public void changeList(String listId) throws Exception {
         JSONObject updateMember = new JSONObject();
@@ -139,10 +200,10 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Update the email Address of this member
-     * 
-     * @param emailAddress
-     * @throws Exception
+     * Update the email Address of this member.
+     *
+     * @param emailAddress the email address
+     * @throws Exception the exception
      */
     public void changeEmailAddress(String emailAddress) throws Exception {
 
@@ -161,10 +222,10 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Update the email address of this member
-     * 
-     * @param status
-     * @throws Exception
+     * Update the email address of this member.
+     *
+     * @param status the status
+     * @throws Exception the exception
      */
     public void changeMemberStatus(MemberStatus status) throws Exception {
         JSONObject updateMember = new JSONObject();
@@ -177,6 +238,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the unique email id.
+     *
      * @return the unique_email_id
      */
     public String getUnique_email_id() {
@@ -184,6 +247,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the email address.
+     *
      * @return the email_Address
      */
     public String getEmail_address() {
@@ -191,18 +256,26 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the status.
+     *
      * @return the status
      */
     public MemberStatus getStatus() {
         return status;
     }
 
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
     public void setStatus(MemberStatus status) {
         this.status = status;
     }
 
     /**
-     * 
+     * Gets the status if new.
+     *
      * @return the status_if_new
      */
     public MemberStatus getStatus_if_new() {
@@ -210,23 +283,35 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Set the status_if_new when creating a new member
-     * 
-     * @param status_if_new
+     * Set the status_if_new when creating a new member.
+     *
+     * @param status_if_new the new status if new
      */
     public void setStatus_if_new(MemberStatus status_if_new) {
         this.status_if_new = status_if_new;
     }
 
+    /**
+     * Gets the email type.
+     *
+     * @return the email type
+     */
     public EmailType getEmail_type() {
         return email_type;
     }
 
+    /**
+     * Sets the email type.
+     *
+     * @param email_type the new email type
+     */
     public void setEmail_type(EmailType email_type) {
         this.email_type = email_type;
     }
 
     /**
+     * Gets the timestamp signup.
+     *
      * @return the timestamp_signup
      */
     public String getTimestamp_signup() {
@@ -234,6 +319,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the timestamp opt.
+     *
      * @return the timestamp_opt
      */
     public String getTimestamp_opt() {
@@ -241,6 +328,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the avg open rate.
+     *
      * @return the avg_open_rate
      */
     public double getAvg_open_rate() {
@@ -248,6 +337,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the avg click rate.
+     *
      * @return the avg_click_rate
      */
     public double getAvg_click_rate() {
@@ -255,6 +346,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the mail chimp list.
+     *
      * @return the listId
      */
     public MailChimpList getMailChimpList() {
@@ -262,6 +355,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the last changed.
+     *
      * @return the last_changed date
      */
     public String getLast_changed() {
@@ -269,11 +364,11 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Set the member activities fot this specific member
-     * 
-     * @param unique_email_id
-     * @param listID
-     * @throws Exception
+     * Set the member activities fot this specific member.
+     *
+     * @param unique_email_id the unique email id
+     * @param listID the list ID
+     * @throws Exception the exception
      */
     private void setMemberActivities(String unique_email_id, String listID) throws Exception {
         List<MemberActivity> activities    = new ArrayList<>();
@@ -308,6 +403,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the interest.
+     *
      * @return the member interests. The map key is the interest/segment identifier
      *         and value is the subscription boolean.
      */
@@ -316,10 +413,10 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Add/Update an intrests subscription
-     * 
-     * @param key
-     * @param subscribe
+     * Add/Update an intrests subscription.
+     *
+     * @param key the key
+     * @param subscribe the subscribe
      * @return the previous value associated with key, or null if there was none.)
      */
     public Boolean putInterest(String key, Boolean subscribe) {
@@ -330,6 +427,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the member activities.
+     *
      * @return the member activities
      */
     public List<MemberActivity> getMemberActivities() {
@@ -349,6 +448,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the connection.
+     *
      * @return the MailChimp com.github.alexanderwe.bananaj.connection
      */
     public MailChimpConnection getConnection() {
@@ -356,6 +457,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the merge fields.
+     *
      * @return a HashMap of all merge fields
      */
     public HashMap<String, String> getMerge_fields() {
@@ -363,10 +466,10 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Add/update a merge field
-     * 
-     * @param key
-     * @param value
+     * Add/update a merge field.
+     *
+     * @param key the key
+     * @param value the value
      * @return the previous value associated with key, or null if there was none.)
      */
     public String putMerge_fields(String key, String value) {
@@ -374,6 +477,8 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the ip signup.
+     *
      * @return the sign up IP Address
      */
     public String getIp_signup() {
@@ -381,12 +486,17 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the ip opt.
+     *
      * @return the opt-in IP Address
      */
     public String getIp_opt() {
         return ip_opt;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         StringBuilder                   stringBuilder = new StringBuilder();

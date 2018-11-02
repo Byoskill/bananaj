@@ -13,6 +13,7 @@ import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
 import com.github.alexanderwe.bananaj.model.MailchimpObject;
 import com.github.alexanderwe.bananaj.utils.DateConverter;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class for representing a file manager folder.
  * Created by alexanderweiss on 22.01.16.
@@ -20,17 +21,43 @@ import com.github.alexanderwe.bananaj.utils.DateConverter;
 public class FileManagerFolder extends MailchimpObject{
 
 
+    /** The folder id. */
     private int folderId;
+    
+    /** The name. */
     private String name;
+    
+    /** The file count. */
     private int file_count;
+    
+    /** The created at. */
     private LocalDateTime createdAt;
+    
+    /** The created by. */
     private String createdBy;
+    
+    /** The files. */
     private ArrayList<FileManagerFile> files;
+    
+    /** The json data. */
     private JSONObject jsonData;
+    
+    /** The connection. */
     private MailChimpConnection connection;
 
 
 
+    /**
+     * Instantiates a new file manager folder.
+     *
+     * @param id the id
+     * @param name the name
+     * @param file_count the file count
+     * @param createdAt the created at
+     * @param createdBy the created by
+     * @param jsonData the json data
+     * @param connection the connection
+     */
     public FileManagerFolder(int id, String name, int file_count, LocalDateTime createdAt, String createdBy, JSONObject jsonData, MailChimpConnection connection){
         super(String.valueOf(id),jsonData);	// set string representation of folder id
         this.folderId = id;	// set integer representation of folder id
@@ -41,6 +68,12 @@ public class FileManagerFolder extends MailchimpObject{
         this.connection = connection;
     }
 
+    /**
+     * Instantiates a new file manager folder.
+     *
+     * @param connection the connection
+     * @param jsonFileManagerFolder the json file manager folder
+     */
     public FileManagerFolder(MailChimpConnection connection, JSONObject jsonFileManagerFolder){
         super(String.valueOf(jsonFileManagerFolder.getInt("id")), jsonFileManagerFolder);	// set string representation of folder id
         this.folderId = jsonFileManagerFolder.getInt("id");	// set integer representation of folder id
@@ -51,6 +84,12 @@ public class FileManagerFolder extends MailchimpObject{
         this.connection = connection;
     }
 
+    /**
+     * Change name.
+     *
+     * @param name the name
+     * @throws Exception the exception
+     */
     public void changeName(String name) throws Exception{
         JSONObject changedFolder  = new JSONObject();
         changedFolder.put("name", name);
@@ -58,26 +97,56 @@ public class FileManagerFolder extends MailchimpObject{
 
     }
 
+    /**
+     * Delete folder.
+     *
+     * @throws Exception the exception
+     */
     public void deleteFolder() throws Exception {
     	getConnection().do_Delete(new URL(getConnection().getFilemanagerfolderendpoint()+"/"+getId()), getConnection().getApikey());
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the file count.
+     *
+     * @return the file count
+     */
     public int getFile_count() {
         return file_count;
     }
 
+    /**
+     * Gets the created at.
+     *
+     * @return the created at
+     */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * Gets the created by.
+     *
+     * @return the created by
+     */
     public String getCreatedBy() {
         return createdBy;
     }
 
+    /**
+     * Gets the files.
+     *
+     * @return the files
+     */
     public ArrayList<FileManagerFile> getFiles() {
     	if (files == null) {	// defer loading files list untill requested.
             try{
@@ -89,6 +158,11 @@ public class FileManagerFolder extends MailchimpObject{
         return files;
     }
 
+    /**
+     * Sets the files.
+     *
+     * @throws Exception the exception
+     */
     private void setFiles() throws Exception {
 		ArrayList<FileManagerFile> files = new ArrayList<FileManagerFile>();
     	if (file_count > 0) {
@@ -113,6 +187,12 @@ public class FileManagerFolder extends MailchimpObject{
     	this.files = files;
     }
 
+    /**
+     * Gets the file.
+     *
+     * @param id the id
+     * @return the file
+     */
     public FileManagerFile getFile(int id){
         for (FileManagerFile file:files){
             if(Integer.parseInt(file.getId()) == id){
@@ -122,18 +202,36 @@ public class FileManagerFolder extends MailchimpObject{
         return null;
     }
 
+    /**
+     * Gets the folder id.
+     *
+     * @return the folder id
+     */
     public int getFolderId() {
     	return folderId;
     }
 
+    /**
+     * Gets the json data.
+     *
+     * @return the json data
+     */
     public JSONObject getJsonData() {
         return jsonData;
     }
 
+    /**
+     * Gets the connection.
+     *
+     * @return the connection
+     */
     public MailChimpConnection getConnection() {
         return connection;
     }
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
     public String toString(){
         return "Folder-name: " + this.getName() + "Folder-Id: " + this.getId() + " File-count: " + this.getFile_count() + " Created at: " + this.getCreatedAt() +System.lineSeparator()+ " Files: "+ this.getFiles();

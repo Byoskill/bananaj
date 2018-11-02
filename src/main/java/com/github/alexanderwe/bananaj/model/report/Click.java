@@ -6,19 +6,38 @@ package com.github.alexanderwe.bananaj.model.report;
 
 import java.time.LocalDateTime;
 
+// TODO: Auto-generated Javadoc
 /**
- * Class for representing clicks for a campaign
- * @author alexanderweiss
+ * Class for representing clicks for a campaign.
  *
+ * @author alexanderweiss
  */
 public class Click {
 	
+	/** The clicks total. */
 	private int clicks_total;
+	
+	/** The unique clicks. */
 	private int unique_clicks;
+	
+	/** The unique subscriber clicks. */
 	private int unique_subscriber_clicks;
+	
+	/** The click rate. */
 	private double click_rate;
+	
+	/** The last click. */
 	private LocalDateTime last_click;
 
+	/**
+	 * Instantiates a new click.
+	 *
+	 * @param clicks_total the clicks total
+	 * @param unique_clicks the unique clicks
+	 * @param unique_subscriber_clicks the unique subscriber clicks
+	 * @param click_rate the click rate
+	 * @param last_click the last click
+	 */
 	public Click(int clicks_total, int unique_clicks, int unique_subscriber_clicks, double click_rate, LocalDateTime last_click) {
 		this.clicks_total = clicks_total;
 		this.unique_clicks = unique_clicks;
@@ -28,6 +47,8 @@ public class Click {
 	}
 
 	/**
+	 * Gets the clicks total.
+	 *
 	 * @return the clicks_total
 	 */
 	public int getClicks_total() {
@@ -35,6 +56,8 @@ public class Click {
 	}
 
 	/**
+	 * Gets the unique clicks.
+	 *
 	 * @return the unique_clicks
 	 */
 	public int getUnique_clicks() {
@@ -42,6 +65,8 @@ public class Click {
 	}
 
 	/**
+	 * Gets the unique subscriber clicks.
+	 *
 	 * @return the unique_subscriber_clicks
 	 */
 	public int getUnique_subscriber_clicks() {
@@ -49,6 +74,8 @@ public class Click {
 	}
 
 	/**
+	 * Gets the click rate.
+	 *
 	 * @return the click_rate
 	 */
 	public double getClick_rate() {
@@ -56,6 +83,8 @@ public class Click {
 	}
 
 	/**
+	 * Gets the last click.
+	 *
 	 * @return the last_click
 	 */
 	public LocalDateTime getLast_click() {

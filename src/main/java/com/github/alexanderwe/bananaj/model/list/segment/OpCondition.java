@@ -5,19 +5,27 @@ import org.json.JSONObject;
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 import com.github.alexanderwe.bananaj.model.list.segment.DoubleCondition.Builder;
 
+// TODO: Auto-generated Javadoc
 /**
- * Segment option condition condition_type That only use operator and field
+ * Segment option condition condition_type That only use operator and field.
  */
 public class OpCondition implements AbstractCondition {
 
+	/** The condition type. */
 	private ConditionType condition_type;
+    
+    /** The field. */
     private String field;
+    
+    /** The operator. */
     private Operator operator;
 
     /**
-     * Used when created a Condition locally with the Builder class
+     * Used when created a Condition locally with the Builder class.
+     *
+     * @param b the b
+     * @throws ConditionException the condition exception
      * @see Builder
-     * @param b
      */
 
     public OpCondition(Builder b) throws ConditionException{
@@ -40,18 +48,36 @@ public class OpCondition implements AbstractCondition {
         }
     }
 
+	/**
+	 * Gets the condition type.
+	 *
+	 * @return the condition type
+	 */
 	public ConditionType getConditionType() {
 		return condition_type;
 	}
 
+    /**
+     * Gets the field.
+     *
+     * @return the field
+     */
     public String getField() {
         return field;
     }
 
+    /**
+     * Gets the op.
+     *
+     * @return the op
+     */
     public Operator getOp() {
         return operator;
     }
 
+    /* (non-Javadoc)
+     * @see com.github.alexanderwe.bananaj.model.list.segment.AbstractCondition#getJsonRepresentation()
+     */
     @Override
     public JSONObject getJsonRepresentation(){
         JSONObject condition = new JSONObject();
@@ -62,6 +88,9 @@ public class OpCondition implements AbstractCondition {
         return condition;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "ConditionType: " + getConditionType() + System.lineSeparator() +
@@ -69,26 +98,58 @@ public class OpCondition implements AbstractCondition {
                 "Operator: " + getOp().value() +  System.lineSeparator();
     }
 
+    /**
+     * The Class Builder.
+     */
     public static class Builder {
-    	private ConditionType condition_type;
+    	
+	    /** The condition type. */
+	    private ConditionType condition_type;
+        
+        /** The field. */
         private String field;
+        
+        /** The operator. */
         private Operator operator;
 
+        /**
+         * Condition type.
+         *
+         * @param condition_type the condition type
+         * @return the builder
+         */
         public Builder conditionType(ConditionType condition_type) {
             this.condition_type = condition_type;
             return this;
         }
 
+        /**
+         * Field.
+         *
+         * @param field the field
+         * @return the builder
+         */
         public Builder field(String field) {
             this.field = field;
             return this;
         }
 
+        /**
+         * Operator.
+         *
+         * @param op the op
+         * @return the builder
+         */
         public Builder operator(Operator op) {
             this.operator = op;
             return this;
         }
 
+        /**
+         * Builds the.
+         *
+         * @return the op condition
+         */
         public OpCondition build() {
             try {
                 return new OpCondition(this);

@@ -15,6 +15,7 @@ import com.github.alexanderwe.bananaj.model.MailchimpObject;
 import com.github.alexanderwe.bananaj.utils.DateConverter;
 import com.github.alexanderwe.bananaj.utils.FileInspector;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class for representing one specific file manager file.
  * Created by alexanderweiss on 22.01.16.
@@ -22,35 +23,61 @@ import com.github.alexanderwe.bananaj.utils.FileInspector;
  */
 public class FileManagerFile extends MailchimpObject {
 
+    /** The folder id. */
     private int folder_id;
+    
+    /** The type. */
     private String type;
+    
+    /** The name. */
     private String name;
+    
+    /** The full size url. */
     private String full_size_url;
+    
+    /** The size. */
     private int size;
+    
+    /** The created at. */
     private LocalDateTime createdAt;
+    
+    /** The created by. */
     private String createdBy;
+    
+    /** The width. */
     private int width;
+    
+    /** The height. */
     private int height;
+    
+    /** The file data. */
     private String file_data;
+    
+    /** The connection. */
     private MailChimpConnection connection;
+    
+    /** The is image. */
     private boolean isImage;
 
+    /** The Constant BUFFER_SIZE. */
     private static final int BUFFER_SIZE = 4096;
 
 
     /**
-     * File is an image
-     * @param id
-     * @param folder_id
-     * @param type
-     * @param name
-     * @param full_size_url
-     * @param size
-     * @param createdAt
-     * @param createdBy
-     * @param width
-     * @param height
-     * @param jsonData
+     * File is an image.
+     *
+     * @param id the id
+     * @param folder_id the folder id
+     * @param type the type
+     * @param name the name
+     * @param full_size_url the full size url
+     * @param size the size
+     * @param createdAt the created at
+     * @param createdBy the created by
+     * @param width the width
+     * @param height the height
+     * @param connection the connection
+     * @param jsonData the json data
      */
     public FileManagerFile(int id, int folder_id, String type, String name, String full_size_url, int size, LocalDateTime createdAt, String createdBy, int width, int height, MailChimpConnection connection,  JSONObject jsonData) {
         super(String.valueOf(id),jsonData);
@@ -68,16 +95,18 @@ public class FileManagerFile extends MailchimpObject {
     }
 
     /**
-     * File is not an image
-     * @param id
-     * @param folder_id
-     * @param type
-     * @param name
-     * @param full_size_url
-     * @param size
-     * @param createdAt
-     * @param createdBy
-     * @param jsonData
+     * File is not an image.
+     *
+     * @param id the id
+     * @param folder_id the folder id
+     * @param type the type
+     * @param name the name
+     * @param full_size_url the full size url
+     * @param size the size
+     * @param createdAt the created at
+     * @param createdBy the created by
+     * @param connection the connection
+     * @param jsonData the json data
      */
     public FileManagerFile(int id, int folder_id, String type, String name, String full_size_url, int size, LocalDateTime createdAt, String createdBy, MailChimpConnection connection, JSONObject jsonData) {
         super(String.valueOf(id),jsonData);
@@ -92,6 +121,12 @@ public class FileManagerFile extends MailchimpObject {
         this.isImage = false;
     }
 
+    /**
+     * Instantiates a new file manager file.
+     *
+     * @param connection the connection
+     * @param jsonFileManagerFile the json file manager file
+     */
     public FileManagerFile(MailChimpConnection connection, JSONObject jsonFileManagerFile) {
         super(String.valueOf(jsonFileManagerFile.getInt("id")), jsonFileManagerFile);
         this.folder_id = jsonFileManagerFile.getInt("id");
@@ -114,6 +149,11 @@ public class FileManagerFile extends MailchimpObject {
         }
     }
 
+    /**
+     * Instantiates a new file manager file.
+     *
+     * @param b the b
+     */
     public FileManagerFile (Builder b){
         this.name = b.name;
         this.file_data = b.file_data;
@@ -121,9 +161,10 @@ public class FileManagerFile extends MailchimpObject {
     }
 
     /**
-     * Change the name of the file
-     * @param name
-     * @throws Exception
+     * Change the name of the file.
+     *
+     * @param name the name
+     * @throws Exception the exception
      */
     public void changeName(String name) throws Exception{
         JSONObject changedFileName = new JSONObject();
@@ -134,9 +175,10 @@ public class FileManagerFile extends MailchimpObject {
     }
 
     /**
-     * Change the folder of this file
+     * Change the folder of this file.
+     *
      * @param folderID  Setting folderID to "0" will remove a file from its current folder.
-     * @throws Exception
+     * @throws Exception the exception
      */
     public void changeFolder(int folderID) throws Exception {
         JSONObject changedFileName = new JSONObject();
@@ -146,10 +188,21 @@ public class FileManagerFile extends MailchimpObject {
         this.folder_id = folderID;
     }
 
+    /**
+     * Delete file.
+     *
+     * @throws Exception the exception
+     */
     public void deleteFile() throws Exception {
     	getConnection().do_Delete(new URL(getConnection().getFilesendpoint()+"/"+getId()), getConnection().getApikey());
     }
 
+    /**
+     * Download file.
+     *
+     * @param saveDir the save dir
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     //http://www.codejava.net/java-se/networking/use-httpurlconnection-to-download-file-from-an-http-url
     public void downloadFile(String saveDir)
             throws IOException {
@@ -205,102 +258,200 @@ public class FileManagerFile extends MailchimpObject {
         httpConn.disconnect();
     }
 
+    /**
+     * Gets the folder id.
+     *
+     * @return the folder id
+     */
     public int getFolder_id() {
         return folder_id;
     }
 
 
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
     public String getType() {
         return type;
     }
 
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
 
+    /**
+     * Gets the full size url.
+     *
+     * @return the full size url
+     */
     public String getFull_size_url() {
         return full_size_url;
     }
 
 
+    /**
+     * Gets the size.
+     *
+     * @return the size
+     */
     public int getSize() {
         return size;
     }
 
 
+    /**
+     * Gets the created at.
+     *
+     * @return the created at
+     */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
 
+    /**
+     * Gets the created by.
+     *
+     * @return the created by
+     */
     public String getCreatedBy() {
         return createdBy;
     }
 
 
+    /**
+     * Gets the width.
+     *
+     * @return the width
+     */
     public int getWidth() {
         return width;
     }
 
 
+    /**
+     * Gets the height.
+     *
+     * @return the height
+     */
     public int getHeight() {
         return height;
     }
 
 
+    /**
+     * Gets the file data.
+     *
+     * @return the file data
+     */
     public String getFile_data() {
         return file_data;
     }
 
+    /**
+     * Gets the connection.
+     *
+     * @return the connection
+     */
     public MailChimpConnection getConnection() {
         return connection;
     }
 
 
+    /**
+     * Checks if is image.
+     *
+     * @return true, if is image
+     */
     public boolean isImage(){
         return this.isImage;
     }
 
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString(){
         return "ID: " + this.getId() +" Name: " + this.getName() + " Type: " + this.getType() + " Width: " + this.getWidth()+"px "  + " Height: "+ this.getHeight()+"px" +" "+this.getType() + " Folder-Id: " + this.getFolder_id();
     }
 
 
+    /**
+     * The Class Builder.
+     */
     public static class Builder {
+        
+        /** The name. */
         private String name;
+        
+        /** The file data. */
         private String file_data;
+        
+        /** The folder id. */
         private int folderId;
+        
+        /** The json representation. */
         private JSONObject jsonRepresentation = new JSONObject();
 
+        /**
+         * Name.
+         *
+         * @param name the name
+         * @return the file manager file. builder
+         */
         public FileManagerFile.Builder name(String name) {
             this.name = name;
             return this;
         }
 
+        /**
+         * Folder.
+         *
+         * @param folderId the folder id
+         * @return the file manager file. builder
+         */
         public FileManagerFile.Builder folder(int folderId) {
             this.folderId = folderId;
             return this;
         }
 
+        /**
+         * File data.
+         *
+         * @param file_data the file data
+         * @return the file manager file. builder
+         */
         public FileManagerFile.Builder fileData(String file_data) {
             this.file_data = file_data;
             return this;
         }
 
         /**
-         * Extract the data of the file
-         * @param file
-         * @return
+         * Extract the data of the file.
+         *
+         * @param file the file
+         * @return the file manager file. builder
          */
         public FileManagerFile.Builder fileData(File file) {
             this.file_data = FileInspector.getInstance().encodeFileToBase64Binary(file);
             return this;
         }
 
+        /**
+         * Builds the.
+         *
+         * @return the file manager file
+         */
         public FileManagerFile build() {
             return new FileManagerFile(this);
         }

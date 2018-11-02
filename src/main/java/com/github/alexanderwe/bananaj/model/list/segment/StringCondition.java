@@ -4,21 +4,33 @@ import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 
+// TODO: Auto-generated Javadoc
 /**
- * Segment option condition condition_type uses a String value
+ * Segment option condition condition_type uses a String value.
  */
 public class StringCondition implements AbstractCondition {
 
+	/** The condition type. */
 	private ConditionType condition_type;
+    
+    /** The field. */
     private String field;
+    
+    /** The operator. */
     private Operator operator;
+    
+    /** The extra. */
     private String extra;
+    
+    /** The value. */
     private String value;
 
     /**
-     * Used when created a Condition locally with the Builder class
+     * Used when created a Condition locally with the Builder class.
+     *
+     * @param b the b
+     * @throws ConditionException the condition exception
      * @see Builder
-     * @param b
      */
 
     public StringCondition(Builder b) throws ConditionException {
@@ -49,26 +61,54 @@ public class StringCondition implements AbstractCondition {
         }
     }
 
+	/**
+	 * Gets the condition type.
+	 *
+	 * @return the condition type
+	 */
 	public ConditionType getConditionType() {
 		return condition_type;
 	}
 
+	/**
+	 * Gets the field.
+	 *
+	 * @return the field
+	 */
 	public String getField() {
         return field;
     }
 
+    /**
+     * Gets the op.
+     *
+     * @return the op
+     */
     public Operator getOp() {
         return operator;
     }
 
+    /**
+     * Gets the extra.
+     *
+     * @return the extra
+     */
     public String getExtra() {
         return extra;
     }
 
+    /**
+     * Gets the value.
+     *
+     * @return the value
+     */
     public String getValue() {
         return value;
     }
 
+    /* (non-Javadoc)
+     * @see com.github.alexanderwe.bananaj.model.list.segment.AbstractCondition#getJsonRepresentation()
+     */
     @Override
     public JSONObject getJsonRepresentation(){
         JSONObject condition = new JSONObject();
@@ -83,6 +123,9 @@ public class StringCondition implements AbstractCondition {
         return condition;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "ConditionType: " + getConditionType() + System.lineSeparator() +
@@ -92,38 +135,86 @@ public class StringCondition implements AbstractCondition {
                 "Value: " + getValue() + System.lineSeparator();
     }
 
+    /**
+     * The Class Builder.
+     */
     public static class Builder {
-    	private ConditionType condition_type;
+    	
+	    /** The condition type. */
+	    private ConditionType condition_type;
+        
+        /** The field. */
         private String field;
+        
+        /** The operator. */
         private Operator operator;
+        
+        /** The extra. */
         private String extra;
+        
+        /** The value. */
         private String value;
 
+        /**
+         * Condition type.
+         *
+         * @param condition_type the condition type
+         * @return the builder
+         */
         public Builder conditionType(ConditionType condition_type) {
             this.condition_type = condition_type;
             return this;
         }
 
+        /**
+         * Field.
+         *
+         * @param field the field
+         * @return the builder
+         */
         public Builder field(String field) {
             this.field = field;
             return this;
         }
 
+        /**
+         * Operator.
+         *
+         * @param op the op
+         * @return the builder
+         */
         public Builder operator(Operator op) {
             this.operator = op;
             return this;
         }
 
+        /**
+         * Extra.
+         *
+         * @param extra the extra
+         * @return the builder
+         */
         public Builder extra(String extra) {
             this.extra = extra;
             return this;
         }
 
+        /**
+         * Value.
+         *
+         * @param value the value
+         * @return the builder
+         */
         public Builder value(String value) {
             this.value = value;
             return this;
         }
 
+        /**
+         * Builds the.
+         *
+         * @return the string condition
+         */
         public StringCondition build() {
             try {
                 return new StringCondition(this);

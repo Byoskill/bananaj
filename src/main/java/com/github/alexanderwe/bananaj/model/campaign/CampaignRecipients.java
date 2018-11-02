@@ -4,18 +4,24 @@ import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class CampaignRecipients.
  */
 public class CampaignRecipients {
 
+    /** The list id. */
     private String list_id;
+    
+    /** The segment opts. */
     private CampaignSegmentOpts segment_opts;
 
     /**
-     * Used when created a Condition locally with the Builder class
+     * Used when created a Condition locally with the Builder class.
+     *
+     * @param b the b
+     * @throws ConditionException the condition exception
      * @see Builder
-     * @param b
      */
 
     public CampaignRecipients(Builder b) throws ConditionException{
@@ -23,14 +29,29 @@ public class CampaignRecipients {
     	this.list_id = b.list_id;
     }
 
+    /**
+     * Gets the list id.
+     *
+     * @return the list id
+     */
     public String getListId() {
         return list_id;
     }
 
+    /**
+     * Gets the segment opts.
+     *
+     * @return the segment opts
+     */
     public CampaignSegmentOpts getSegmentOpts() {
         return segment_opts;
     }
 
+    /**
+     * Gets the json representation.
+     *
+     * @return the json representation
+     */
     public JSONObject getJsonRepresentation(){
         JSONObject recipents = new JSONObject();
         
@@ -42,26 +63,53 @@ public class CampaignRecipients {
         return recipents;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return  "List ID: " + getListId() + System.lineSeparator() +
                 "Segment opts: " + getSegmentOpts().toString();
     }
 
+    /**
+     * The Class Builder.
+     */
     public static class Builder {
+        
+        /** The list id. */
         private String list_id;
+        
+        /** The segment opts. */
         private CampaignSegmentOpts segment_opts;
 
+        /**
+         * List id.
+         *
+         * @param list_id the list id
+         * @return the builder
+         */
         public Builder listId(String list_id) {
             this.list_id = list_id;
             return this;
         }
 
+        /**
+         * Segment opts.
+         *
+         * @param op the op
+         * @return the builder
+         */
         public Builder segmentOpts(CampaignSegmentOpts op) {
             this.segment_opts = op;
             return this;
         }
 
+        /**
+         * Builds the.
+         *
+         * @return the campaign recipients
+         */
         public CampaignRecipients build() {
             try {
                 return new CampaignRecipients(this);

@@ -35,6 +35,7 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
+// TODO: Auto-generated Javadoc
 /**
  * Class for the com.github.alexanderwe.bananaj.connection to mailchimp servers. Used to get lists from mailchimp account.
  * @author alexanderweiss
@@ -42,20 +43,50 @@ import jxl.write.WritableWorkbook;
  */
 public class MailChimpConnection extends Connection{
 
+	/** The server. */
 	private String server;
+	
+	/** The apikey. */
 	private String apikey;
+	
+	/** The apiendpoint. */
 	private final String apiendpoint;
+	
+	/** The listendpoint. */
 	private final String listendpoint;
+	
+	/** The campaignfolderendpoint. */
 	private final String campaignfolderendpoint;
+	
+	/** The campaignendpoint. */
 	private final String campaignendpoint;
+	
+	/** The templatefolderendpoint. */
 	private final String templatefolderendpoint;
+	
+	/** The templateendpoint. */
 	private final String templateendpoint;
+	
+	/** The automationendpoint. */
 	private final String automationendpoint;
+	
+	/** The filemanagerfolderendpoint. */
 	private final String filemanagerfolderendpoint;
+	
+	/** The filesendpoint. */
 	private final String filesendpoint;
+	
+	/** The account. */
 	private Account account;
+	
+	/** The file manager. */
 	private FileManager fileManager;
 	
+	/**
+	 * Instantiates a new mail chimp connection.
+	 *
+	 * @param apikey the apikey
+	 */
 	public MailChimpConnection(String apikey){
 		this.server = apikey.split("-")[1];
 		this.apikey = "apikey "+apikey;
@@ -71,20 +102,22 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Get the lists in your account
+	 * Get the lists in your account.
+	 *
 	 * @return List containing the first 100 lists
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public List<MailChimpList> getLists() throws Exception {
 		return getLists(100,0);
 	}
 
 	/**
-	 * Get lists in your account with pagination
+	 * Get lists in your account with pagination.
+	 *
 	 * @param count Number of lists to return
 	 * @param offset Zero based offset
 	 * @return List containing Mailchimp lists
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public List<MailChimpList> getLists(int count, int offset) throws Exception{
 		List<MailChimpList> mailChimpLists = new ArrayList<MailChimpList>();
@@ -103,9 +136,11 @@ public class MailChimpConnection extends Connection{
 	}
 	
 	/**
-	 * Get a specific mailchimp list
+	 * Get a specific mailchimp list.
+	 *
+	 * @param listID the list ID
 	 * @return a Mailchimp list object
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public MailChimpList getList(String listID) throws Exception{
 		JSONObject jsonList = new JSONObject(do_Get(new URL(listendpoint +"/"+listID),getApikey()));
@@ -114,8 +149,14 @@ public class MailChimpConnection extends Connection{
 
 
 	/**
-	 * Create a new list in your mailchimp account
-	 * @param listName
+	 * Create a new list in your mailchimp account.
+	 *
+	 * @param listName the list name
+	 * @param permission_reminder the permission reminder
+	 * @param email_type_option the email type option
+	 * @param campaignDefaults the campaign defaults
+	 * @return the mail chimp list
+	 * @throws Exception the exception
 	 */
 	public MailChimpList createList(String listName, String permission_reminder, boolean email_type_option, CampaignDefaults campaignDefaults) throws Exception{
 		setAccount();
@@ -146,17 +187,21 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Delete a list from your account
-	 * @param listID
-	 * @throws Exception
+	 * Delete a list from your account.
+	 *
+	 * @param listID the list ID
+	 * @throws Exception the exception
 	 */
 	public void deleteList(String listID) throws Exception{
 		do_Delete(new URL(listendpoint +"/"+listID),getApikey());
 	}
 
 	/**
-	 * Write all lists to an Excel file
-	 * @throws Exception
+	 * Write all lists to an Excel file.
+	 *
+	 * @param filepath the filepath
+	 * @param show_merge the show merge
+	 * @throws Exception the exception
 	 */
 	public void writeAllListToExcel(String filepath, boolean show_merge) throws Exception{
 		WritableWorkbook workbook = Workbook.createWorkbook(new File(filepath+".xls"));
@@ -250,18 +295,22 @@ public class MailChimpConnection extends Connection{
 	}
 
     /**
-     * Get campaign folders from MailChimp
+     * Get campaign folders from MailChimp.
+     *
      * @return List containing the first 100 campaign folders
+     * @throws Exception the exception
      */
     public List<CampaignFolder> getCampaignFolders() throws Exception{
         return getCampaignFolders(100,0);
     }
 
     /**
-     * Get campaign folders from MailChimp with pagination
+     * Get campaign folders from MailChimp with pagination.
+     *
      * @param count Number of campaign folders to return
      * @param offset Zero based offset
      * @return List containing the campaign folders
+     * @throws Exception the exception
      */
     public List<CampaignFolder> getCampaignFolders(int count, int offset) throws Exception{
     	List<CampaignFolder> campaignFolders = new ArrayList<>();
@@ -278,9 +327,11 @@ public class MailChimpConnection extends Connection{
     }
 
     /**
-     * Get a specific template folder
-     * @param folder_id
-     * @return
+     * Get a specific template folder.
+     *
+     * @param folder_id the folder id
+     * @return the campaign folder
+     * @throws Exception the exception
      */
     public CampaignFolder getCampaignFolder(String folder_id) throws Exception{
 
@@ -289,9 +340,11 @@ public class MailChimpConnection extends Connection{
     }
 
     /**
-     * Add a template folder with a specific name
+     * Add a template folder with a specific name.
+     *
      * @param name Name to associate with the folder
-     * @return
+     * @return the campaign folder
+     * @throws Exception the exception
      */
     public CampaignFolder addCampaignFolder(String name) throws Exception{
     	JSONObject campaignFolder = new JSONObject();
@@ -301,29 +354,32 @@ public class MailChimpConnection extends Connection{
     }
 
     /**
-     * Delete a specific template folder
-     * @param folder_id
+     * Delete a specific template folder.
+     *
+     * @param folder_id the folder id
+     * @throws Exception the exception
      */
     public void deleteCampaignFolder(String folder_id) throws Exception{
     	do_Delete(new URL(campaignfolderendpoint +"/"+folder_id), getApikey());
     }
 
     /**
-     * Get campaigns from mailchimp account
+     * Get campaigns from mailchimp account.
+     *
      * @return List containing the first 100 campaigns
-     * @throws Exception
+     * @throws Exception the exception
      */
     public List<Campaign> getCampaigns() throws Exception {
     	return getCampaigns(100,0);
     }
 
     /**
-     * Get campaigns from mailchimp account with pagination
+     * Get campaigns from mailchimp account with pagination.
+     *
      * @param count Number of campaigns to return
      * @param offset Zero based offset
      * @return List containing campaigns
-     * @throws Exception
-     *  * TODO add campaignsettings
+     * @throws Exception  * TODO add campaignsettings
      */
     public List<Campaign> getCampaigns(int count, int offset) throws Exception {
     	List<Campaign> campaigns = new ArrayList<Campaign>();
@@ -340,11 +396,11 @@ public class MailChimpConnection extends Connection{
     }
 
 	/**
-	 * Get a campaign from mailchimp account
-	 * @param campaignID
+	 * Get a campaign from mailchimp account.
+	 *
+	 * @param campaignID the campaign ID
 	 * @return a campaign object
-	 * @throws Exception
-	 * TODO add campaignsettings
+	 * @throws Exception TODO add campaignsettings
 	 */
 	public Campaign getCampaign(String campaignID) throws Exception {
 		JSONObject campaign = new JSONObject(do_Get(new URL(campaignendpoint +"/"+campaignID),getApikey()));
@@ -352,10 +408,13 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Create a new campaign in your mailchimp account
-	 * @param type
-	 * @param mailChimpList
-	 * @param settings
+	 * Create a new campaign in your mailchimp account.
+	 *
+	 * @param type the type
+	 * @param mailChimpList the mail chimp list
+	 * @param settings the settings
+	 * @return the campaign
+	 * @throws Exception the exception
 	 */
 	public Campaign createCampaign(CampaignType type, MailChimpList mailChimpList, CampaignSettings settings) throws Exception{
 		
@@ -391,6 +450,15 @@ public class MailChimpConnection extends Connection{
 		return new Campaign(this, campaign);
 	}
 
+	/**
+	 * Creates the campaign.
+	 *
+	 * @param type the type
+	 * @param mailRecipients the mail recipients
+	 * @param settings the settings
+	 * @return the campaign
+	 * @throws Exception the exception
+	 */
 	public Campaign createCampaign(CampaignType type, CampaignRecipients mailRecipients, CampaignSettings settings) throws Exception{
 		
 		JSONObject campaign = new JSONObject();
@@ -423,6 +491,14 @@ public class MailChimpConnection extends Connection{
 		return new Campaign(this, campaign);
 	}
 	
+	/**
+	 * Put.
+	 *
+	 * @param settings the settings
+	 * @param key the key
+	 * @param value the value
+	 * @return the JSON object
+	 */
 	private JSONObject put(JSONObject settings, String key, String value) {
 		if (value != null) {
 			return settings.put(key, value);
@@ -430,6 +506,14 @@ public class MailChimpConnection extends Connection{
 		return settings;
 	}
 
+	/**
+	 * Put.
+	 *
+	 * @param settings the settings
+	 * @param key the key
+	 * @param value the value
+	 * @return the JSON object
+	 */
 	private JSONObject put(JSONObject settings, String key, Boolean value) {
 		if (value != null) {
 			return settings.put(key, value);
@@ -438,27 +522,32 @@ public class MailChimpConnection extends Connection{
 	}
 	
 	/**
-	 * Delete a campaign from mailchimp account
-	 * @param campaignID
-	 * @throws Exception
+	 * Delete a campaign from mailchimp account.
+	 *
+	 * @param campaignID the campaign ID
+	 * @throws Exception the exception
 	 */
 	public void deleteCampaign(String campaignID) throws Exception{
 		do_Delete(new URL(campaignendpoint +"/"+campaignID),getApikey());
 	}
 
     /**
-     * Get template folders from MailChimp
+     * Get template folders from MailChimp.
+     *
      * @return List containing the first 100 template folders
+     * @throws Exception the exception
      */
 	public List<TemplateFolder> getTemplateFolders() throws Exception{
         return getTemplateFolders(100,0);
 	}
 
     /**
-     * Get template folders from MailChimp with pagination
-	 * @param count Number of templates to return
-	 * @param offset Zero based offset
+     * Get template folders from MailChimp with pagination.
+     *
+     * @param count Number of templates to return
+     * @param offset Zero based offset
      * @return List of template folders
+     * @throws Exception the exception
      */
 	public List<TemplateFolder> getTemplateFolders(int count, int offset) throws Exception{
         List<TemplateFolder> templateFolders = new ArrayList<>();
@@ -475,9 +564,11 @@ public class MailChimpConnection extends Connection{
 	}
 
     /**
-     * Get a specific template folder
-     * @param folder_id
-     * @return
+     * Get a specific template folder.
+     *
+     * @param folder_id the folder id
+     * @return the template folder
+     * @throws Exception the exception
      */
     public TemplateFolder getTemplateFolder(String folder_id) throws Exception{
 
@@ -486,8 +577,11 @@ public class MailChimpConnection extends Connection{
     }
 
     /**
-     * Add a template folder with a specific name
-     * @param name
+     * Add a template folder with a specific name.
+     *
+     * @param name the name
+     * @return the template folder
+     * @throws Exception the exception
      */
     public TemplateFolder addTemplateFolder(String name) throws Exception{
         JSONObject templateFolder = new JSONObject();
@@ -497,28 +591,32 @@ public class MailChimpConnection extends Connection{
     }
 
     /**
-     * Delete a specific template folder
-     * @param folder_id
+     * Delete a specific template folder.
+     *
+     * @param folder_id the folder id
+     * @throws Exception the exception
      */
     public void deleteTemplateFolder(String folder_id) throws Exception{
         do_Delete(new URL(templatefolderendpoint +"/"+folder_id), getApikey());
     }
 
 	/**
-	 * Get templates from mailchimp account
+	 * Get templates from mailchimp account.
+	 *
 	 * @return List containing the first 100 templates
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public List<Template> getTemplates() throws Exception{
 		return getTemplates(100,0);
 	}
 
 	/**
-	 * Get templates from mailchimp account with pagination
+	 * Get templates from mailchimp account with pagination.
+	 *
 	 * @param count Number of templates to return
 	 * @param offset Zero based offset
 	 * @return list of templates
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public List<Template> getTemplates(int count, int offset) throws Exception{
 		List<Template> templates = new ArrayList<Template>();
@@ -543,10 +641,11 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Get a template from mailchimp account
-	 * @param id
+	 * Get a template from mailchimp account.
+	 *
+	 * @param id the id
 	 * @return a template object
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public Template getTemplate(String id) throws Exception{
 		JSONObject jsonTemplate = new JSONObject(do_Get(new URL(templateendpoint +"/" +id),getApikey()));
@@ -554,10 +653,12 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Add a template to your MailChimp account
-	 * @param name
-	 * @param html
-	 * @throws Exception
+	 * Add a template to your MailChimp account.
+	 *
+	 * @param name the name
+	 * @param html the html
+	 * @return the template
+	 * @throws Exception the exception
 	 */
 	public Template addTemplate(String name, String html) throws Exception{
 		JSONObject templateJSON = new JSONObject();
@@ -568,11 +669,13 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Add a template to a specific folder to your MailChimp Account
-	 * @param name
-	 * @param folder_id
-	 * @param html
-	 * @throws Exception
+	 * Add a template to a specific folder to your MailChimp Account.
+	 *
+	 * @param name the name
+	 * @param folder_id the folder id
+	 * @param html the html
+	 * @return the template
+	 * @throws Exception the exception
 	 */
 	public Template addTemplate(String name, String folder_id, String html) throws Exception{
 		JSONObject templateJSON = new JSONObject();
@@ -584,29 +687,32 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
-	 * Delete a specific template
-	 * @param id
-	 * @throws Exception
+	 * Delete a specific template.
+	 *
+	 * @param id the id
+	 * @throws Exception the exception
 	 */
 	public void deleteTemplate(String id) throws Exception {
 		do_Delete(new URL(templateendpoint +"/" +id),getApikey());
 	}
 
 	/**
-	 * Get automations from mailchimp account
+	 * Get automations from mailchimp account.
+	 *
 	 * @return List containing the first 100 automations
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public List<Automation> getAutomations() throws Exception{
 		return getAutomations(100,0);
 	}
 	
 	/**
-	 * Get all automations from mailchimp account with pagination
+	 * Get all automations from mailchimp account with pagination.
+	 *
 	 * @param count Number of templates to return
 	 * @param offset Zero based offset
 	 * @return List containing automations
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public List<Automation> getAutomations(int count, int offset) throws Exception{
 		List<Automation> automations = new ArrayList<Automation>();
@@ -625,10 +731,11 @@ public class MailChimpConnection extends Connection{
 	}
 	
 	/**
-	 * Get an specific automation
-	 * @param id
+	 * Get an specific automation.
+	 *
+	 * @param id the id
 	 * @return an Automation object
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public Automation getAutomation(String id) throws Exception{
 		JSONObject jsonAutomation = new JSONObject(do_Get(new URL(automationendpoint +"/"+id),getApikey()));
@@ -638,7 +745,8 @@ public class MailChimpConnection extends Connection{
 
 	/**
 	 * Get the File/Folder Manager for accessing files and folders in your account.
-	 * @return
+	 *
+	 * @return the file manager
 	 */
 	public FileManager getFileManager() {
 		if (fileManager == null) {
@@ -648,6 +756,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the server.
+	 *
 	 * @return the server
 	 */
 	public String getServer() {
@@ -655,6 +765,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the apikey.
+	 *
 	 * @return the apikey
 	 */
 	public String getApikey() {
@@ -662,6 +774,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the apiendpoint.
+	 *
 	 * @return the apiendpoint
 	 */
 	public String getApiendpoint() {
@@ -669,6 +783,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the listendpoint.
+	 *
 	 * @return the lISTENDPOINT
 	 */
 	public String getListendpoint() {
@@ -676,6 +792,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the campaignendpoint.
+	 *
 	 * @return the campaignendpoint
 	 */
 	public String getCampaignendpoint() {
@@ -683,6 +801,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the templateendpoint.
+	 *
 	 * @return the templateendpoint
 	 */
 	public String getTemplateendpoint() {
@@ -690,6 +810,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the automationendpoint.
+	 *
 	 * @return the automationendpoint
 	 */
 	public String getAutomationendpoint(){
@@ -697,6 +819,8 @@ public class MailChimpConnection extends Connection{
 	}
 
 	/**
+	 * Gets the filemanagerfolderendpoint.
+	 *
 	 * @return the filemanagerfolderendpoint
 	 */
 	public String getFilemanagerfolderendpoint() {
@@ -704,21 +828,38 @@ public class MailChimpConnection extends Connection{
 	}
 
 
+	/**
+	 * Gets the filesendpoint.
+	 *
+	 * @return the filesendpoint
+	 */
 	public String getFilesendpoint() {
 		return filesendpoint;
 	}
 
+	/**
+	 * Gets the campaignfolderendpoint.
+	 *
+	 * @return the campaignfolderendpoint
+	 */
 	public String getCampaignfolderendpoint() {
 		return this.campaignfolderendpoint;
 	}
 
+	/**
+	 * Gets the templatefolderendpoint.
+	 *
+	 * @return the templatefolderendpoint
+	 */
 	public String getTemplatefolderendpoint() {
 		return this.templatefolderendpoint;
 	}
 
 	/**
+	 * Gets the account.
+	 *
 	 * @return the account
-	 * @throws Exception 
+	 * @throws Exception the exception
 	 */
 	public Account getAccount() throws Exception {
 		setAccount();
@@ -727,6 +868,8 @@ public class MailChimpConnection extends Connection{
 
 	/**
 	 * Set the account of this com.github.alexanderwe.bananaj.connection.
+	 *
+	 * @throws Exception the exception
 	 */
 	private void setAccount() throws Exception {
 		if (account == null) {

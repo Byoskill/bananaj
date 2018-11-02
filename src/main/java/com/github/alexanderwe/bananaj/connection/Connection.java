@@ -15,12 +15,22 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Alexander on 10.08.2016.
  */
 public class Connection {
 
 
+    /**
+     * Do get.
+     *
+     * @param url the url
+     * @param authorization the authorization
+     * @return the string
+     * @throws TransportException the transport exception
+     * @throws URISyntaxException the URI syntax exception
+     */
     public String do_Get(URL url, String authorization) throws TransportException, URISyntaxException {
         CloseableHttpClient httpclient;
 
@@ -41,6 +51,16 @@ public class Connection {
         }
     }
 
+    /**
+     * Do post.
+     *
+     * @param url the url
+     * @param post_string the post string
+     * @param authorization the authorization
+     * @return the string
+     * @throws TransportException the transport exception
+     * @throws URISyntaxException the URI syntax exception
+     */
     public String do_Post(URL url, String post_string, String authorization) throws TransportException, URISyntaxException {
         CloseableHttpClient httpclient;
 
@@ -65,6 +85,16 @@ public class Connection {
         }
     }
 
+    /**
+     * Do patch.
+     *
+     * @param url the url
+     * @param patch_string the patch string
+     * @param authorization the authorization
+     * @return the string
+     * @throws TransportException the transport exception
+     * @throws URISyntaxException the URI syntax exception
+     */
     public String do_Patch(URL url, String patch_string, String authorization) throws TransportException, URISyntaxException {
         CloseableHttpClient httpclient;
 
@@ -89,6 +119,16 @@ public class Connection {
     }
 
 
+    /**
+     * Do put.
+     *
+     * @param url the url
+     * @param put_string the put string
+     * @param authorization the authorization
+     * @return the string
+     * @throws TransportException the transport exception
+     * @throws URISyntaxException the URI syntax exception
+     */
     public String do_Put(URL url, String put_string, String authorization) throws TransportException, URISyntaxException {
         CloseableHttpClient httpclient;
 
@@ -112,6 +152,15 @@ public class Connection {
         }
     }
 
+    /**
+     * Do post.
+     *
+     * @param url the url
+     * @param authorization the authorization
+     * @return the string
+     * @throws TransportException the transport exception
+     * @throws URISyntaxException the URI syntax exception
+     */
     public String do_Post(URL url, String authorization) throws TransportException, URISyntaxException {
         CloseableHttpClient httpclient = null;
 
@@ -133,6 +182,15 @@ public class Connection {
         }
     }
 
+    /**
+     * Do delete.
+     *
+     * @param url the url
+     * @param authorization the authorization
+     * @return the string
+     * @throws TransportException the transport exception
+     * @throws URISyntaxException the URI syntax exception
+     */
     public String do_Delete(URL url, String authorization) throws TransportException, URISyntaxException {
         CloseableHttpClient httpclient;
 
@@ -155,6 +213,13 @@ public class Connection {
     }
 
 
+    /**
+     * Creates the response from entity.
+     *
+     * @param entity the entity
+     * @return the string
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private String createResponseFromEntity(HttpEntity entity) throws IOException {
         InputStream entityStream;
         if (entity != null) {
@@ -173,6 +238,14 @@ public class Connection {
         return null;
     }
 
+    /**
+     * Builds the transport error.
+     *
+     * @param verb the verb
+     * @param url the url
+     * @param response the response
+     * @return the transport exception
+     */
     private TransportException buildTransportError(String verb, String url, CloseableHttpResponse response) {
         int responseCode = response.getStatusLine().getStatusCode();
         JSONObject errObj;
@@ -191,6 +264,13 @@ public class Connection {
     }
 
 
+    /**
+     * Gets the error obj string.
+     *
+     * @param errObj the err obj
+     * @param key the key
+     * @return the error obj string
+     */
     private String getErrorObjString(JSONObject errObj, String key) {
         if (errObj.has(key)) {
             return errObj.getString(key);
