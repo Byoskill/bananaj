@@ -96,8 +96,12 @@ public class MailChimpList extends MailchimpObject {
      * @param connection         the connection
      * @param jsonRepresentation the json representation
      */
-    public MailChimpList(String id, String name, int membercount, LocalDateTime dateCreated,
-            MailChimpConnection connection, JSONObject jsonRepresentation) {
+    public MailChimpList(String id, 
+            String name, 
+            int membercount, 
+            LocalDateTime dateCreated,
+            MailChimpConnection connection, 
+            JSONObject jsonRepresentation) {
         super(id, jsonRepresentation);
         this.name = name;
         this.membercount = membercount;
@@ -156,16 +160,10 @@ public class MailChimpList extends MailchimpObject {
             while (a.hasNext()) {
                 String key = a.next();
                 // loop to get the dynamic key
-                String value = memberMergeTags.getString(key);
+                Object value = memberMergeTags.get(key);
                 merge_fields.put(key, value);
             }
-            Member member = new Member(memberDetail.getString("id"), this, merge_fields,
-                    memberDetail.getString("unique_email_id"), memberDetail.getString("email_address"),
-                    MemberStatus.valueOf(memberDetail.getString("status").toUpperCase()),
-                    memberDetail.getString("timestamp_signup"), memberDetail.getString("ip_signup"),
-                    memberDetail.getString("timestamp_opt"), memberDetail.getString("ip_opt"),
-                    memberStats.getDouble("avg_open_rate"), memberStats.getDouble("avg_click_rate"),
-                    memberDetail.getString("last_changed"), this.getConnection(), memberDetail);
+            Member member = new Member(this, memberDetail);
             members.add(member);
 
         }

@@ -103,7 +103,7 @@ public class Member extends MailchimpObject {
             while (mergeTagsI.hasNext()) {
                 String key = mergeTagsI.next();
                 // loop to get the dynamic key
-                String value = memberMergeTags.getString(key);
+                Object value = memberMergeTags.get(key);
                 merge_fields.put(key, value);
             }
         }
