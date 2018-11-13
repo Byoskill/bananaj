@@ -84,6 +84,8 @@ public class Member extends MailchimpObject {
 
     /** The connection. */
     private MailChimpConnection      connection;
+    
+    private Integer memberRating;
 
     /**
      * Instantiates a new member.
@@ -117,7 +119,7 @@ public class Member extends MailchimpObject {
                 memberInterest.put(key, value);
             }
         }
-
+        this.memberRating = member.optInt("member_rating");
         this.mailChimpList = mailChimpList;
         this.merge_fields = merge_fields;
         this.unique_email_id = member.getString("unique_email_id");
@@ -523,6 +525,14 @@ public class Member extends MailchimpObject {
                 + "Last changed: " + this.getLast_changed() + System.lineSeparator()
                 + stringBuilder.toString()
                 + "_________________________________________________";
+    }
+
+    public Integer getMemberRating() {
+        return memberRating;
+    }
+
+    public void setMemberRating(Integer memberRating) {
+        this.memberRating = memberRating;
     }
 
 }
