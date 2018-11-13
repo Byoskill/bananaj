@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -240,9 +241,9 @@ public class MailChimpConnection extends Connection{
 			if (show_merge){
 				int last_column = 9;
 
-				Iterator<Entry<String, String>> iter = members.get(0).getMerge_fields().entrySet().iterator();
+				Iterator<Entry<String, Object>> iter = members.get(0).getMerge_fields().entrySet().iterator();
 				while (iter.hasNext()) {
-					Entry<String, String> pair = iter.next();
+					Entry<String, Object> pair = iter.next();
 					sheet.addCell(new Label(last_column,0,pair.getKey(),times16format));
 					iter.remove(); // avoids a ConcurrentModificationException
 					last_column++;
@@ -267,10 +268,10 @@ public class MailChimpConnection extends Connection{
 				if (show_merge){
 					//add merge fields values
 					int last_index = 9;
-					Iterator<Entry<String, String>> iter_member = member.getMerge_fields().entrySet().iterator();
+					Iterator<Entry<String, Object>> iter_member = member.getMerge_fields().entrySet().iterator();
 					while (iter_member.hasNext()) {
-						Entry<String, String> pair = iter_member.next();
-						sheet.addCell(new Label(last_index,i+1,pair.getValue()));
+						Entry<String, Object> pair = iter_member.next();
+						sheet.addCell(new Label(last_index,i+1, Objects.toString(pair.getValue())));
 						iter_member.remove(); // avoids a ConcurrentModificationException
 						last_index++;
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -196,6 +198,7 @@ public class StringArrayCondition implements AbstractCondition {
          *
          * @return the string array condition
          */
+        @Nullable
         public StringArrayCondition build() {
             try {
                 return new StringArrayCondition(this);

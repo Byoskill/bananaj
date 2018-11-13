@@ -1,5 +1,7 @@
 package com.github.alexanderwe.bananaj.model.list.segment;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
@@ -150,6 +152,7 @@ public class OpCondition implements AbstractCondition {
          *
          * @return the op condition
          */
+        @Nullable
         public OpCondition build() {
             try {
                 return new OpCondition(this);

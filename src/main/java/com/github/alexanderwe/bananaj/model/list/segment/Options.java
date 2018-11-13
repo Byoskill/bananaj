@@ -61,7 +61,7 @@ public class Options {
      *
      * @param matchType the new match type
      */
-    public void setMatchType(MatchType matchType) {
+    public final void setMatchType(MatchType matchType) {
         this.matchType = matchType;
     }
 
@@ -79,7 +79,7 @@ public class Options {
      *
      * @param conditions the new conditions
      */
-    public void setConditions(ArrayList<AbstractCondition> conditions) {
+    public final void setConditions(ArrayList<AbstractCondition> conditions) {
         this.conditions = conditions;
     }
 

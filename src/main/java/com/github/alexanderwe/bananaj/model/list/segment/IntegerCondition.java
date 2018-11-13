@@ -1,5 +1,7 @@
 package com.github.alexanderwe.bananaj.model.list.segment;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
@@ -216,6 +218,7 @@ public class IntegerCondition implements AbstractCondition {
          *
          * @return the integer condition
          */
+       @Nullable
         public IntegerCondition build() {
             try {
                 return new IntegerCondition(this);

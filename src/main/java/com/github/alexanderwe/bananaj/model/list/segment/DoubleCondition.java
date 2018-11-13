@@ -1,5 +1,7 @@
 package com.github.alexanderwe.bananaj.model.list.segment;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
@@ -184,6 +186,7 @@ public class DoubleCondition implements AbstractCondition {
          *
          * @return the double condition
          */
+        @Nullable
         public DoubleCondition build() {
             try {
                 return new DoubleCondition(this);

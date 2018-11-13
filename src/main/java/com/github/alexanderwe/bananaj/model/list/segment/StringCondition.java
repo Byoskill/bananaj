@@ -1,5 +1,7 @@
 package com.github.alexanderwe.bananaj.model.list.segment;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
@@ -215,6 +217,7 @@ public class StringCondition implements AbstractCondition {
          *
          * @return the string condition
          */
+        @Nullable
         public StringCondition build() {
             try {
                 return new StringCondition(this);

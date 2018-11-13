@@ -1,5 +1,7 @@
 package com.github.alexanderwe.bananaj.model.list.segment;
 
+import javax.annotation.Nullable;
+
 import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
@@ -269,6 +271,7 @@ public class IPGeoInCondition implements AbstractCondition {
          *
          * @return the IP geo in condition
          */
+       @Nullable
         public IPGeoInCondition build() {
             try {
                 return new IPGeoInCondition(this);

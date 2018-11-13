@@ -63,11 +63,11 @@ public class FileManagerFolder extends MailchimpObject {
     public FileManagerFolder(int id, String name, int file_count, LocalDateTime createdAt, String createdBy,
             JSONObject jsonData, MailChimpConnection connection) {
         super(String.valueOf(id), jsonData); // set string representation of folder id
-        this.folderId   = id;        // set integer representation of folder id
-        this.name       = name;
+        this.folderId = id; // set integer representation of folder id
+        this.name = name;
         this.file_count = file_count;
-        this.createdAt  = createdAt;
-        this.createdBy  = createdBy;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
         this.connection = connection;
     }
 
@@ -80,13 +80,13 @@ public class FileManagerFolder extends MailchimpObject {
     public FileManagerFolder(MailChimpConnection connection, JSONObject jsonFileManagerFolder) {
         super(String.valueOf(jsonFileManagerFolder.getInt("id")), jsonFileManagerFolder); // set string representation
                                                                                           // of folder id
-        this.folderId   = jsonFileManagerFolder.getInt("id");                         // set integer representation of
-                                                                                      // folder id
-        this.name       = jsonFileManagerFolder.getString("name");
+        this.folderId = jsonFileManagerFolder.getInt("id"); // set integer representation of
+                                                            // folder id
+        this.name = jsonFileManagerFolder.getString("name");
         this.file_count = jsonFileManagerFolder.getInt("file_count");
-        this.createdAt  = DateConverter.getInstance()
+        this.createdAt = DateConverter.getInstance()
                 .createDateFromISO8601(jsonFileManagerFolder.getString("created_at"));
-        this.createdBy  = jsonFileManagerFolder.getString("created_by");
+        this.createdBy = jsonFileManagerFolder.getString("created_by");
         this.connection = connection;
     }
 
@@ -178,13 +178,13 @@ public class FileManagerFolder extends MailchimpObject {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-            int                   offset = 0;
-            int                   count  = 100;
+            int offset = 0;
+            int count = 100;
             List<FileManagerFile> filelist;
 
             do {
-                filelist  = connection.getFileManager().getFileManagerFiles(count, offset);
-                offset   += count;
+                filelist = connection.getFileManager().getFileManagerFiles(count, offset);
+                offset += count;
                 for (FileManagerFile file : filelist) {
                     if (file.getFolder_id() == folderId) {
                         files.add(file);
