@@ -70,9 +70,8 @@ import jxl.write.WritableWorkbook;
  *
  */
 public class MailChimpList extends MailchimpObject {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(MailChimpList.class);
-    
 
     /** The name. */
     private String              name;
@@ -96,11 +95,11 @@ public class MailChimpList extends MailchimpObject {
      * @param connection         the connection
      * @param jsonRepresentation the json representation
      */
-    public MailChimpList(String id, 
-            String name, 
-            int membercount, 
+    public MailChimpList(String id,
+            String name,
+            int membercount,
             LocalDateTime dateCreated,
-            MailChimpConnection connection, 
+            MailChimpConnection connection,
             JSONObject jsonRepresentation) {
         super(id, jsonRepresentation);
         this.name = name;
@@ -279,6 +278,7 @@ public class MailChimpList extends MailchimpObject {
         json.put("timestamp_signup", member.getTimestamp_signup());
         json.put("ip_opt", member.getIp_opt());
         json.put("timestamp_opt", member.getTimestamp_opt());
+//FIXME:: adding member rating
 
         try {
             String results = getConnection().do_Patch(
