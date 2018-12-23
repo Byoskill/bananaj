@@ -4,7 +4,6 @@
  */
 package com.github.alexanderwe.bananaj.model.campaign;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum CampaignStatus.
  */

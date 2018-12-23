@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 
-// TODO: Auto-generated Javadoc
 /**
  * Class for representing your mailchimp account.
  */

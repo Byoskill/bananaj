@@ -5,7 +5,6 @@
 package com.github.alexanderwe.bananaj.model.list;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * Class for representing a growth history of a mailChimpList.
  *

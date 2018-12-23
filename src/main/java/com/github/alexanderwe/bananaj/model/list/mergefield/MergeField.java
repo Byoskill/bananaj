@@ -3,7 +3,7 @@ package com.github.alexanderwe.bananaj.model.list.mergefield;
 import com.github.alexanderwe.bananaj.model.MailchimpObject;
 import org.json.JSONObject;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Created by Alexander on 09.08.2016.
  */

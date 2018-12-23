@@ -47,17 +47,17 @@ public class Template extends MailchimpObject  {
 	 * @param templateType the template type
 	 * @param shareUrl the share url
 	 * @param dateCreated the date created
-	 * @param folder_id the folder id
+	 * @param folderId the folder id
 	 * @param connection the connection
 	 * @param jsonRepresentation the json representation
 	 */
-	public Template(int id, String templateName, TemplateType templateType, String shareUrl, LocalDateTime dateCreated, String folder_id, MailChimpConnection connection, JSONObject jsonRepresentation) {
+	public Template(int id, String templateName, TemplateType templateType, String shareUrl, LocalDateTime dateCreated, String folderId, MailChimpConnection connection, JSONObject jsonRepresentation) {
 		super(String.valueOf(id),jsonRepresentation);
 		this.templateName = templateName;
 		this.templateType = templateType;
 		this.shareUrl = shareUrl;
 		this.dateCreated = dateCreated;
-		this.folder_id = folder_id;
+		this.folder_id = folderId;
 		this.connection = connection;
 	}
 

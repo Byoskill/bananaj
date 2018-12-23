@@ -21,8 +21,10 @@ import com.github.alexanderwe.bananaj.model.report.Open;
 import com.github.alexanderwe.bananaj.model.report.Report;
 import com.github.alexanderwe.bananaj.model.report.ReportListStats;
 import com.github.alexanderwe.bananaj.utils.DateConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Class for representing a mailchimp campaign.
  *
@@ -50,6 +52,8 @@ public class Campaign extends MailchimpObject {
 	
 	/** The campaign settings. */
 	private CampaignSettings campaignSettings;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(Campaign.class);
 	
 	
 	/**
@@ -74,7 +78,7 @@ public class Campaign extends MailchimpObject {
 		try {
 			setContent();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Could not create unmarshall the campaign object", e);
 		}
 	}
 	
@@ -105,7 +109,7 @@ public class Campaign extends MailchimpObject {
 		try {
 			setContent();
 		} catch (Exception e) {
-			e.printStackTrace();
+            LOGGER.error("Could not create unmarshall the campaign object", e);
 		}
 	}
 

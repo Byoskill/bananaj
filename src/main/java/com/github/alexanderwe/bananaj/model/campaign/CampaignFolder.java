@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.model.MailchimpObject;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Created by alexanderweiss on 10.08.2016.
  */

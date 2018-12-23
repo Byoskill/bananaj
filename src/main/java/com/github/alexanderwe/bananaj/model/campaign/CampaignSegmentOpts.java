@@ -10,7 +10,6 @@ import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 import com.github.alexanderwe.bananaj.model.list.segment.AbstractCondition;
 import com.github.alexanderwe.bananaj.model.list.segment.MatchType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CampaignSegmentOpts.
  */

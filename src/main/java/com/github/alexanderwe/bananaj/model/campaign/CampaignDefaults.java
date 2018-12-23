@@ -4,7 +4,7 @@
  */
 package com.github.alexanderwe.bananaj.model.campaign;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class CampaignDefaults.
  */

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import com.github.alexanderwe.bananaj.exceptions.ConditionException;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class CampaignRecipients.
  */

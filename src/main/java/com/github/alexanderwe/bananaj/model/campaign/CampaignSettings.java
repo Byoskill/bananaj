@@ -15,7 +15,6 @@ import com.github.alexanderwe.bananaj.exceptions.CampaignSettingsException;
 import com.github.alexanderwe.bananaj.exceptions.EmailException;
 import com.github.alexanderwe.bananaj.utils.EmailValidator;
 
-// TODO: Auto-generated Javadoc
 /**
  * Class for representing settings for a campaign, including subject, from name, reply-to address, and more.
  * @author alexanderweiss
