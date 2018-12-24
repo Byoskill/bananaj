@@ -33,6 +33,14 @@ public class Connection implements AutoCloseable {
         connPool.setMaxTotal(200);//configurable through app.properties
         // Increase default max connection per route to 50
         connPool.setDefaultMaxPerRoute(20);//configurable through app.properties
+        IdleConnectionMonitorThread staleMonitor
+                = new IdleConnectionMonitorThread(connPool);
+        staleMonitor.start();
+        try {
+            staleMonitor.join(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
