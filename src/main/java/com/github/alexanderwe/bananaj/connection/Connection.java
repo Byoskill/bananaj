@@ -24,34 +24,25 @@ import java.nio.charset.StandardCharsets;
  */
 public class Connection implements AutoCloseable {
 
-    private static final PoolingHttpClientConnectionManager connPool;
-
-    static {
-
-        connPool = new PoolingHttpClientConnectionManager();
-        // Increase max total connection to 200
-        connPool.setMaxTotal(200);//configurable through app.properties
-        // Increase default max connection per route to 50
-        connPool.setDefaultMaxPerRoute(20);//configurable through app.properties
-        IdleConnectionMonitorThread staleMonitor
-                = new IdleConnectionMonitorThread(connPool);
-        staleMonitor.start();
-        try {
-            staleMonitor.join(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private final CloseableHttpClient httpClient;
-    private final Logger logger;
+    public static PoolingHttpClientConnectionManager pool = null; // Should be overriden
+    private final CloseableHttpClient                       httpClient;
+    private final Logger                                    logger;
 
     public Connection() {
 
-        httpClient = HttpClients.custom()
-                .setConnectionManager(connPool).build();
         logger = LoggerFactory.getLogger(Connection.class);
+        if (pool != null) {
+            httpClient = HttpClients.custom()
+                    .setConnectionManager(pool)
+                    .setConnectionManagerShared(true)
+                    .build();
+        } else {
+            logger.error("No connection pool has been defined.");
+            httpClient = HttpClients.custom()
+                    .setConnectionManagerShared(true)
+                    .build();
+        }
+
     }
 
     /**
