@@ -1,5 +1,6 @@
 plugins {
     id "com.jfrog.bintray" version "1.8.4"
+    id 'signing'
 }
 apply plugin: "java"
 apply plugin: "maven"
@@ -9,7 +10,7 @@ apply plugin: 'signing'
 
 
 description = 'A simple MailChimp API wrapper written in Java'
-
+version = "0.6.3"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -26,8 +27,8 @@ dependencies {
     compile group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6.12'
     compile group: 'org.json', name: 'json', version: '20180130'
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
-	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
     compile group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.5.0'
     compile group: 'com.squareup.retrofit2', name: 'adapter-java8', version: '2.5.0'
@@ -39,7 +40,6 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.8'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version: '2.9.8'
-
 
 
 }
@@ -61,7 +61,6 @@ task fatJar(type: Jar) {
     with jar
 }
 
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -69,33 +68,8 @@ publishing {
 
             artifact javadocJar
             artifact sourcesJar
+            version project.version
 
-            pom {
-                name = 'bananaj'
-                description = 'A simple MailChimp API wrapper written in Java'
-                url = 'https://github.com/alexanderwe/bananaj'
-                licenses {
-                    license {
-                        name = 'MIT'
-                        url = 'https://raw.githubusercontent.com/alexanderwe/bananaj/master/LICENSE.md'
-                    }
-                }
-                developers {
-                    developer {
-                        name = 'Alexander Weiß'
-                        email = 'https://www.github.com/alexanderwe'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/alexanderwe/bananaj.git'
-                    developerConnection = 'scm:git:git://github.com/alexanderwe/bananaj.git'
-                    url = 'https://github.com/alexanderwe/bananaj'
-                }
-                issueManagement {
-                    url = 'https://github.com/alexanderwe/bananaj/issues'
-                    system = 'GitHub'
-                }
-            }
         }
     }
     repositories {
@@ -115,7 +89,7 @@ bintray {
     key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
     publications = ['mavenJava']
     pkg {
-        repo = 'maven'
+        repo = 'generic'
         name = 'bananaj'
         userOrg = user
         licenses = ['Apache-2.0']
@@ -123,16 +97,10 @@ bintray {
         labels = ['mailchimp', 'api', 'java']
         publicDownloadNumbers = true
         version {
-            name = project.version
+            name = project.name
             desc = 'Simple api for accessing Mailchimp - Work in progess'
+            vcsTag = project.version
             released  = new Date()
         }
     }
 }
-
-signing {
-    sign publishing.publications.mavenJava
-}
-
-
-
