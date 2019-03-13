@@ -28,20 +28,8 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-
-    compile group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.5.0'
-    compile group: 'com.squareup.retrofit2', name: 'adapter-java8', version: '2.5.0'
-    compile group: 'com.squareup.retrofit2', name: 'adapter-guava', version: '2.5.0'
-    compile group: 'com.squareup.retrofit2', name: 'converter-java8', version: '2.5.0'
-    compile group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.5.0'
-    compile group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '3.13.1'
-    compile group: 'joda-time', name: 'joda-time', version: '2.10.1'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.8'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version: '2.9.8'
-
-
-
+	
+    
 }
 
 task javadocJar(type: Jar) {
@@ -60,7 +48,6 @@ task fatJar(type: Jar) {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
-
 
 publishing {
     publications {
@@ -111,28 +98,26 @@ publishing {
 
 
 bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+ 	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
     publications = ['mavenJava']
-    pkg {
-        repo = 'maven'
-        name = 'bananaj'
-        userOrg = user
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/Byoskill/bananaj.git'
-        labels = ['mailchimp', 'api', 'java']
-        publicDownloadNumbers = true
-        version {
-            name = project.version
-            desc = 'Simple api for accessing Mailchimp - Work in progess'
-            released  = new Date()
-        }
-    }
+	pkg {
+		repo = 'maven'
+		name = 'bananaj'
+		userOrg = user
+		licenses = ['Apache-2.0']
+		vcsUrl = 'https://github.com/Byoskill/bananaj.git'
+		labels = ['mailchimp', 'api', 'java']
+		publicDownloadNumbers = true
+		version {
+			name = project.version
+			desc = 'Simple api for accessing Mailchimp - Work in progess'
+			released  = new Date()			
+		}
+	}
 }
 
 signing {
     sign publishing.publications.mavenJava
 }
-
-
 
