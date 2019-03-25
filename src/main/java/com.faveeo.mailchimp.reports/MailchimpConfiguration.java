@@ -14,9 +14,18 @@ public class MailchimpConfiguration {
 
     public static final String URL = "https://us13.api.mailchimp.com/3.0/";
     private static final Logger log = LoggerFactory.getLogger(MailchimpConfiguration.class);
+    private String key;
 
     public MailchimpConfiguration() {
         super();
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(final String key) {
+        this.key = key;
     }
 
     /**
@@ -34,7 +43,7 @@ public class MailchimpConfiguration {
         }
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new AuthenticationInterceptor())
+                .addInterceptor(new AuthenticationInterceptor(getKey()))
                 .addInterceptor(interceptor)
                 .connectTimeout(5, TimeUnit.MINUTES)
                 .readTimeout(5, TimeUnit.MINUTES)

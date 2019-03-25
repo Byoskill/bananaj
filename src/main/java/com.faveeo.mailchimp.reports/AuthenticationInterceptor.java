@@ -7,12 +7,20 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class AuthenticationInterceptor implements Interceptor {
+
+    private String key;
+
+    public AuthenticationInterceptor(String key) {
+
+        this.key = key;
+    }
+
     @Override
     public Response intercept(final Chain chain) throws IOException {
         Request original = chain.request();
 
         Request.Builder builder = original.newBuilder()
-            .header("Authorization", "apikey d091cb7094540ba029f5c906c851ebd7-us13");
+                .header("Authorization", "apikey " + key);
 
         Request request = builder.build();
         return chain.proceed(request);

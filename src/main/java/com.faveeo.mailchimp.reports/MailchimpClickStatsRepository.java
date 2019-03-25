@@ -1,6 +1,5 @@
 package com.faveeo.mailchimp.reports;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,8 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 
 @JsonIgnoreProperties
@@ -23,7 +20,6 @@ public class MailchimpClickStatsRepository {
     private static final int COUNT = 100;
 
     private static final Logger log = LoggerFactory.getLogger(MailchimpClickStatsRepository.class);
-
     private List<MailchimpReport> mailChimpCampaignReports = Collections.synchronizedList(new ArrayList<>());
     private Set<String> treatedReports = Collections.synchronizedSet(new HashSet<>());
     private List<MailchimpClickDetail> clickDetailsRepository = new ArrayList<>();
@@ -52,6 +48,30 @@ public class MailchimpClickStatsRepository {
         return objectMapper.readValue(repositoryFile, MailchimpClickStatsRepository.class);
     }
 
+    public Set<String> getTreatedReports() {
+        return treatedReports;
+    }
+
+    public void setTreatedReports(final Set<String> treatedReports) {
+        this.treatedReports = treatedReports;
+    }
+
+    public List<MailchimpReport> getMailChimpCampaignReports() {
+        return mailChimpCampaignReports;
+    }
+
+    public void setMailChimpCampaignReports(final List<MailchimpReport> mailChimpCampaignReports) {
+        this.mailChimpCampaignReports = mailChimpCampaignReports;
+    }
+
+    public List<MailchimpClickDetail> getClickDetailsRepository() {
+        return clickDetailsRepository;
+    }
+
+    public void setClickDetailsRepository(final List<MailchimpClickDetail> clickDetailsRepository) {
+        this.clickDetailsRepository = clickDetailsRepository;
+    }
+
     public void loadStats(MailchimpReportClient mailchimpReportClient) throws IOException {
         final ObjectMapper objectMapper = initObjectMapper();
         if (mailChimpCampaignReports.isEmpty()) {
@@ -71,21 +91,22 @@ public class MailchimpClickStatsRepository {
                 .filter(report -> !treatedReports.contains(report.id))
                 .collect(Collectors.toList());
 
+
         AtomicInteger treated = new AtomicInteger(mailchimpReports.size() - treatedReports.size());
         mailchimpReports.forEach(report -> {
-                    try {
-                        log.info("Campaign -> {}", report.campaign_title);
-                        this.fetchReportClick(mailchimpReportClient, report);
-                        treatedReports.add(report.id);
-                        scoreRepository(objectMapper);
-                    } catch (IOException e) {
-                        log.error("Cannot fetch all the clicks", e);
-                    } finally {
-                        treated.decrementAndGet();
-                        log.info("Remaining : {}", treated.get());
+            try {
+                log.info("Campaign -> {}", report.campaign_title);
+                this.fetchReportClick(mailchimpReportClient, report);
+                treatedReports.add(report.id);
+                scoreRepository(objectMapper);
+            } catch (IOException e) {
+                log.error("Cannot fetch all the clicks", e);
+            } finally {
+                treated.decrementAndGet();
+                log.info("Remaining : {}", treated.get());
 
-                    }
-                });
+            }
+        });
 
         scoreRepository(objectMapper);
 
@@ -152,7 +173,7 @@ public class MailchimpClickStatsRepository {
     public List<MailchimpClickDetail> mergeAndReturnClickDetails(String listeID) {
 
         final Map<String, List<MailchimpClickDetail>> stringListMap = clickDetailsRepository.stream()
-                .filter(cd -> cd.hasSameListId(listeID))
+                .filter(cd -> cd.listID.equals(listeID))
                 .collect(Collectors.groupingBy(cdetail -> cdetail.url));
         List<MailchimpClickDetail> aggregatedStats = new ArrayList<>(clickDetailsRepository.size());
         stringListMap.forEach((key, value) -> {
