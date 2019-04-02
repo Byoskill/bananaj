@@ -1,7 +1,9 @@
 package com.faveeo.mailchimp.reports;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MailchimpReport {
     public String id;
     public String campaign_title;

@@ -114,6 +114,7 @@ public class MailchimpClickStatsRepository {
 
     private int fetchReports(final MailchimpReportClient mailchimpReportClient, final int offset) throws IOException {
         final JsonNode body = mailchimpReportClient.getReports(COUNT, offset).execute().body();
+        final ObjectMapper objectMapper = initObjectMapper();
 
         log.info("Loading the list of reports");
         final JsonNode reportsNode = Objects.requireNonNull(body).get("reports");
@@ -122,11 +123,7 @@ public class MailchimpClickStatsRepository {
         for (JsonNode jsonNode : reportsNode) {
             res++;
 
-            final MailchimpReport mailchimpReport = new MailchimpReport();
-            mailchimpReport.id = jsonNode.get("id").asText();
-            mailchimpReport.campaign_title = jsonNode.get("campaign_title").asText();
-            mailchimpReport.list_id = jsonNode.get("list_id").asText();
-            mailchimpReport.send_time = new DateTime(jsonNode.get("send_time").asText());
+            final MailchimpReport mailchimpReport = objectMapper.treeToValue(jsonNode, MailchimpReport.class);
             log.info("Report {}", mailchimpReport);
 
             mailChimpCampaignReports.add(mailchimpReport);

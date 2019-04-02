@@ -16,10 +16,12 @@
  */
 package com.faveeo.mailchimp.reports;
 
+import org.joda.time.DateTime;
+
 public class MailchimpReportClicks {
     public int clicks_total;
     public int unique_clicks;
     public int unique_subscriber_clicks;
     public double click_rate;
-    public double last_click;
+    public DateTime last_click;
 }
