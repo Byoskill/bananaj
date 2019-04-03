@@ -4,27 +4,23 @@
  */
 package com.github.alexanderwe.bananaj.model.list.member;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
+import com.github.alexanderwe.bananaj.exceptions.EmailException;
+import com.github.alexanderwe.bananaj.model.MailchimpObject;
+import com.github.alexanderwe.bananaj.model.list.MailChimpList;
+import com.github.alexanderwe.bananaj.utils.EmailValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
-import com.github.alexanderwe.bananaj.exceptions.EmailException;
-import com.github.alexanderwe.bananaj.model.MailchimpObject;
-import com.github.alexanderwe.bananaj.model.list.MailChimpList;
-import com.github.alexanderwe.bananaj.utils.EmailValidator;
+import java.net.URL;
+import java.util.*;
+import java.util.Map.Entry;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * Object for representing a mailchimp member.
  *
@@ -32,62 +28,80 @@ import com.github.alexanderwe.bananaj.utils.EmailValidator;
  */
 public class Member extends MailchimpObject {
 
-    private static final Logger      LOGGER = LoggerFactory.getLogger(Member.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Member.class);
 
-    /** The mail chimp list. */
-    private MailChimpList            mailChimpList;
+    /**
+     * The mail chimp list.
+     */
+    private MailChimpList mailChimpList;
 
-    /** The merge fields. */
-    private Map<String, Object>      merge_fields;
+    /**
+     * The merge fields.
+     */
+    private Map<String, Object> merge_fields;
 
-    /** The unique email id. */
-    private String                   unique_email_id;
-
-    /** The email address. */
-    private String                   email_address;
-
-    /** The status if new. */
-    private MemberStatus             status_if_new;
-
-    /** The email type. */
-    private EmailType                email_type;
-
-    /** The status. */
-    private MemberStatus             status;
-
-    /** The timestamp signup. */
-    private String                   timestamp_signup;
-
-    /** The timestamp opt. */
-    private String                   timestamp_opt;
-
-    /** The ip signup. */
-    private String                   ip_signup;
-
-    /** The ip opt. */
-    private String                   ip_opt;
-
-    /** The avg open rate. */
-    private double                   avg_open_rate;
-
-    /** The avg click rate. */
-    private double                   avg_click_rate;
-
-    /** The last changed. */
-    private String                   last_changed;
-
-    /** The member activities. */
-    private List<MemberActivity>     memberActivities;
-
-    /** The member interest. */
+    /**
+     * The unique email id.
+     */
+    private String unique_email_id;
+    /**
+     * The email address.
+     */
+    private String email_address;
+    /**
+     * The status if new.
+     */
+    private MemberStatus status_if_new;
+    /**
+     * The email type.
+     */
+    private EmailType email_type;
+    /**
+     * The status.
+     */
+    private MemberStatus status;
+    /**
+     * The timestamp signup.
+     */
+    private String timestamp_signup;
+    /**
+     * The timestamp opt.
+     */
+    private String timestamp_opt;
+    /**
+     * The ip signup.
+     */
+    private String ip_signup;
+    /**
+     * The ip opt.
+     */
+    private String ip_opt;
+    /**
+     * The avg open rate.
+     */
+    private double avg_open_rate;
+    /**
+     * The avg click rate.
+     */
+    private double avg_click_rate;
+    /**
+     * The last changed.
+     */
+    private String last_changed;
+    /**
+     * The member activities.
+     */
+    private List<MemberActivity> memberActivities;
+    /**
+     * The member interest.
+     */
     private HashMap<String, Boolean> memberInterest;
-
-    /** The connection. */
-    private MailChimpConnection      connection;
-
-    private Integer                  memberRating;
-
-    private String                   email_client;
+    /**
+     * The connection.
+     */
+    private MailChimpConnection connection;
+    private Integer memberRating;
+    private String email_client;
 
     /**
      * Instantiates a new member.
@@ -166,9 +180,9 @@ public class Member extends MailchimpObject {
      * @param jsonRepresentation the json representation
      */
     public Member(String id, MailChimpList mailChimpList, Map<String, Object> merge_fields, String unique_email_id,
-            String email_address, MemberStatus status, String timestamp_signup, String ip_signup, String timestamp_opt,
-            String ip_opt, double avg_open_rate, double avg_click_rate, String last_changed,
-            MailChimpConnection connection, JSONObject jsonRepresentation) {
+                  String email_address, MemberStatus status, String timestamp_signup, String ip_signup, String timestamp_opt,
+                  String ip_opt, double avg_open_rate, double avg_click_rate, String last_changed,
+                  MailChimpConnection connection, JSONObject jsonRepresentation) {
         super(id, jsonRepresentation);
         this.mailChimpList = mailChimpList;
         this.merge_fields = merge_fields;
@@ -210,6 +224,24 @@ public class Member extends MailchimpObject {
     }
 
     /**
+     * Gets the connection.
+     *
+     * @return the MailChimp com.github.alexanderwe.bananaj.connection
+     */
+    public MailChimpConnection getConnection() {
+        return connection;
+    }
+
+    /**
+     * Gets the mail chimp list.
+     *
+     * @return the listId
+     */
+    public MailChimpList getMailChimpList() {
+        return mailChimpList;
+    }
+
+    /**
      * Update the email Address of this member.
      *
      * @param emailAddress the email address
@@ -223,7 +255,7 @@ public class Member extends MailchimpObject {
             updateMember.put("email_Address", emailAddress);
             this.getConnection()
                     .do_Patch(new URL("https://" + mailChimpList.getConnection().getServer()
-                            + ".api.mailchimp.com/3.0/lists/" + getMailChimpList().getId() + "/members/" + getId()),
+                                    + ".api.mailchimp.com/3.0/lists/" + getMailChimpList().getId() + "/members/" + getId()),
                             updateMember.toString(), connection.getApikey());
             this.email_address = emailAddress;
         } else {
@@ -244,42 +276,6 @@ public class Member extends MailchimpObject {
                 new URL("https://" + mailChimpList.getConnection().getServer() + ".api.mailchimp.com/3.0/lists/"
                         + getMailChimpList().getId() + "/members/" + getId()),
                 updateMember.toString(), connection.getApikey());
-        this.status = status;
-    }
-
-    /**
-     * Gets the unique email id.
-     *
-     * @return the unique_email_id
-     */
-    public String getUnique_email_id() {
-        return unique_email_id;
-    }
-
-    /**
-     * Gets the email address.
-     *
-     * @return the email_Address
-     */
-    public String getEmail_address() {
-        return email_address;
-    }
-
-    /**
-     * Gets the status.
-     *
-     * @return the status
-     */
-    public MemberStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * Sets the status.
-     *
-     * @param status the new status
-     */
-    public void setStatus(MemberStatus status) {
         this.status = status;
     }
 
@@ -320,24 +316,6 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Gets the timestamp signup.
-     *
-     * @return the timestamp_signup
-     */
-    public String getTimestamp_signup() {
-        return timestamp_signup;
-    }
-
-    /**
-     * Gets the timestamp opt.
-     *
-     * @return the timestamp_opt
-     */
-    public String getTimestamp_opt() {
-        return timestamp_opt;
-    }
-
-    /**
      * Gets the avg open rate.
      *
      * @return the avg_open_rate
@@ -356,21 +334,48 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Gets the mail chimp list.
+     * Gets the interest.
      *
-     * @return the listId
+     * @return the member interests. The map key is the interest/segment identifier
+     * and value is the subscription boolean.
      */
-    public MailChimpList getMailChimpList() {
-        return mailChimpList;
+    public HashMap<String, Boolean> getInterest() {
+        return memberInterest;
     }
 
     /**
-     * Gets the last changed.
+     * Add/Update an intrests subscription.
      *
-     * @return the last_changed date
+     * @param key       the key
+     * @param subscribe the subscribe
+     * @return the previous value associated with key, or null if there was none.)
      */
-    public String getLast_changed() {
-        return last_changed;
+    public Boolean putInterest(String key, Boolean subscribe) {
+        if (memberInterest == null) {
+            memberInterest = new HashMap<>();
+        }
+        return memberInterest.put(key, subscribe);
+    }
+
+    /**
+     * Gets the member activities.
+     *
+     * @return the member activities
+     */
+    public List<MemberActivity> getMemberActivities() {
+        if (memberActivities == null) {
+            try {
+                // cache member activity
+                synchronized (this) {
+                    if (memberActivities == null) {
+                        setMemberActivities(unique_email_id, mailChimpList.getId());
+                    }
+                }
+            } catch (Exception e) {
+                LOGGER.error("Cannot obtain the member activities", e);
+            }
+        }
+        return this.memberActivities;
     }
 
     /**
@@ -413,69 +418,6 @@ public class Member extends MailchimpObject {
     }
 
     /**
-     * Gets the interest.
-     *
-     * @return the member interests. The map key is the interest/segment identifier
-     *         and value is the subscription boolean.
-     */
-    public HashMap<String, Boolean> getInterest() {
-        return memberInterest;
-    }
-
-    /**
-     * Add/Update an intrests subscription.
-     *
-     * @param key       the key
-     * @param subscribe the subscribe
-     * @return the previous value associated with key, or null if there was none.)
-     */
-    public Boolean putInterest(String key, Boolean subscribe) {
-        if (memberInterest == null) {
-            memberInterest = new HashMap<>();
-        }
-        return memberInterest.put(key, subscribe);
-    }
-
-    /**
-     * Gets the member activities.
-     *
-     * @return the member activities
-     */
-    public List<MemberActivity> getMemberActivities() {
-        if (memberActivities == null) {
-            try {
-                // cache member activity
-                synchronized (this) {
-                    if (memberActivities == null) {
-                        setMemberActivities(unique_email_id, mailChimpList.getId());
-                    }
-                }
-            } catch (Exception e) {
-                LOGGER.error("Cannot obtain the member activities", e);
-            }
-        }
-        return this.memberActivities;
-    }
-
-    /**
-     * Gets the connection.
-     *
-     * @return the MailChimp com.github.alexanderwe.bananaj.connection
-     */
-    public MailChimpConnection getConnection() {
-        return connection;
-    }
-
-    /**
-     * Gets the merge fields.
-     *
-     * @return a HashMap of all merge fields
-     */
-    public Map<String, Object> getMerge_fields() {
-        return merge_fields;
-    }
-
-    /**
      * Add/update a merge field.
      *
      * @param key   the key
@@ -506,7 +448,7 @@ public class Member extends MailchimpObject {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -528,6 +470,88 @@ public class Member extends MailchimpObject {
                 + "Last changed: " + this.getLast_changed() + System.lineSeparator()
                 + stringBuilder.toString()
                 + "_________________________________________________";
+    }
+
+    /**
+     * Gets the merge fields.
+     *
+     * @return a HashMap of all merge fields
+     */
+    public Map<String, Object> getMerge_fields() {
+        return merge_fields;
+    }
+
+    /**
+     * Gets the unique email id.
+     *
+     * @return the unique_email_id
+     */
+    public String getUnique_email_id() {
+        return unique_email_id;
+    }
+
+    /**
+     * Gets the email address.
+     *
+     * @return the email_Address
+     */
+    public String getEmail_address() {
+        return email_address;
+    }
+
+    /**
+     * Sets the enail adress (testing purpose only)
+     * @param email_address the email address.
+     * @deprecated  test only
+     */
+    @Deprecated()
+    public void setEmail_address(final String email_address) {
+        this.email_address = email_address;
+    }
+
+    /**
+     * Gets the status.
+     *
+     * @return the status
+     */
+    public MemberStatus getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(MemberStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * Gets the timestamp signup.
+     *
+     * @return the timestamp_signup
+     */
+    public String getTimestamp_signup() {
+        return timestamp_signup;
+    }
+
+    /**
+     * Gets the timestamp opt.
+     *
+     * @return the timestamp_opt
+     */
+    public String getTimestamp_opt() {
+        return timestamp_opt;
+    }
+
+    /**
+     * Gets the last changed.
+     *
+     * @return the last_changed date
+     */
+    public String getLast_changed() {
+        return last_changed;
     }
 
     public Integer getMemberRating() {
