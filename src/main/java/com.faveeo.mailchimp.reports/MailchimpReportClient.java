@@ -14,6 +14,9 @@ public interface MailchimpReportClient {
     @GET("reports/{id}/click-details")
     Call<JsonNode> getClickDetailsReportCampaign(@Path("id") String reportId, @Query("count") Integer count, @Query("offset") final int offset);
 
-    @GET("reports/{id}/click-details/members")
-    Call<JsonNode> getMembersPerClicksReportCampaign(@Path("id") String reportId, @Query("count") Integer count, @Query("offset") final int offset);
+    @GET("reports/{id}/click-details/{clickId}/members")
+    Call<JsonNode> getMembersPerClicksReportCampaign(@Path("id") String reportId,
+                                                     @Path("clickId") String clickId,
+                                                     @Query("count") Integer count,
+                                                     @Query("offset") final int offset);
 }
