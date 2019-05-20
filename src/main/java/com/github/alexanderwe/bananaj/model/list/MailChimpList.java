@@ -494,9 +494,9 @@ public class MailChimpList extends MailchimpObject {
                     case EMAIL_ADDRESS:
                         conditions.add(new StringCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
+                                .field(jsonCondition.optString("field"))
                                 .operator(Operator.fromValue(jsonCondition.getString("op")))
-                                .value(jsonCondition.getString("value"))
+                                .value(jsonCondition.optString("value"))
                                 .build());
                         break;
 
@@ -504,9 +504,9 @@ public class MailChimpList extends MailchimpObject {
                     case IP_GEO_ZIP:
                         conditions.add(new IntegerCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
+                                .field(jsonCondition.optString("field"))
                                 .operator(Operator.fromValue(jsonCondition.getString("op")))
-                                .value(jsonCondition.getInt("value"))
+                                .value(jsonCondition.optInt("value"))
                                 .build());
                         break;
 
@@ -518,9 +518,9 @@ public class MailChimpList extends MailchimpObject {
                     case SOCIAL_INFLUENCE:
                         conditions.add(new DoubleCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
+                                .field(jsonCondition.optString("field"))
                                 .operator(Operator.fromValue(jsonCondition.getString("op")))
-                                .value(jsonCondition.getDouble("value"))
+                                .value(jsonCondition.optDouble("value"))
                                 .build());
                         break;
 
@@ -529,10 +529,10 @@ public class MailChimpList extends MailchimpObject {
                     case ZIP_MERGE:
                         conditions.add(new StringCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
+                                .field(jsonCondition.optString("field"))
                                 .operator(Operator.fromValue(jsonCondition.getString("op")))
-                                .extra(jsonCondition.getString("extra"))
-                                .value(jsonCondition.getString("value"))
+                                .extra(jsonCondition.optString("extra"))
+                                .value(jsonCondition.optString("value"))
                                 .build());
                         break;
 
@@ -542,8 +542,8 @@ public class MailChimpList extends MailchimpObject {
                     case IP_GEO_UNKNOWN:
                         conditions.add(new OpCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
-                                .operator(Operator.fromValue(jsonCondition.getString("op")))
+                                .field(jsonCondition.optString("field"))
+                                .operator(Operator.fromValue(jsonCondition.optString("op")))
                                 .build());
                         break;
 
@@ -555,8 +555,8 @@ public class MailChimpList extends MailchimpObject {
                         }
                         conditions.add(new StringArrayCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
-                                .operator(Operator.fromValue(jsonCondition.getString("op")))
+                                .field(jsonCondition.optString("field"))
+                                .operator(Operator.fromValue(jsonCondition.optString("op")))
                                 .value(values)
                                 .build());
                         break;
@@ -564,22 +564,22 @@ public class MailChimpList extends MailchimpObject {
                     case IP_GEO_IN_ZIP:
                         conditions.add(new IntegerCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
-                                .operator(Operator.fromValue(jsonCondition.getString("op")))
-                                .extra(jsonCondition.getInt("extra"))
-                                .value(jsonCondition.getInt("value"))
+                                .field(jsonCondition.optString("field"))
+                                .operator(Operator.fromValue(jsonCondition.optString("op")))
+                                .extra(jsonCondition.optInt("extra"))
+                                .value(jsonCondition.optInt("value"))
                                 .build());
                         break;
 
                     case IP_GEO_IN:
                         conditions.add(new IPGeoInCondition.Builder()
                                 .conditionType(conditiontype)
-                                .field(jsonCondition.getString("field"))
+                                .field(jsonCondition.optString("field"))
                                 .operator(Operator.fromValue(jsonCondition.getString("op")))
-                                .lng(jsonCondition.getString("lng"))
-                                .lat(jsonCondition.getString("lat"))
-                                .value(jsonCondition.getInt("value"))
-                                .addr(jsonCondition.getString("addr"))
+                                .lng(jsonCondition.optString("lng"))
+                                .lat(jsonCondition.optString("lat"))
+                                .value(jsonCondition.optInt("value"))
+                                .addr(jsonCondition.optString("addr"))
                                 .build());
                         break;
                 }
@@ -588,9 +588,9 @@ public class MailChimpList extends MailchimpObject {
         }
 
         return new Segment(
-                jsonSegment.getInt("id"),
-                jsonSegment.getString("name"),
-                jsonSegment.getString("list_id"),
+                jsonSegment.optInt("id"),
+                jsonSegment.optString("name"),
+                jsonSegment.optString("list_id"),
                 SegmentType.valueOf(jsonSegment.getString("type").toUpperCase()),
                 DateConverter.getInstance().createDateFromISO8601(jsonSegment.getString("created_at")),
                 DateConverter.getInstance().createDateFromISO8601(jsonSegment.getString("updated_at")),
