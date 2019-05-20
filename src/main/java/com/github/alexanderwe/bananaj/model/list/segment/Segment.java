@@ -17,33 +17,50 @@ import com.github.alexanderwe.bananaj.model.list.member.Member;
 import com.github.alexanderwe.bananaj.model.list.member.MemberStatus;
 
 // TODO: Auto-generated Javadoc
+
 /**
  * Created by alexanderweiss on 04.02.16.
  */
 public class Segment extends MailchimpObject {
 
-    /** The name. */
-    private String              name;
+    /**
+     * The name.
+     */
+    private String name;
 
-    /** The type. */
-    private SegmentType         type;
+    /**
+     * The type.
+     */
+    private SegmentType type;
 
-    /** The list id. */
-    private String              list_id;
+    /**
+     * The list id.
+     */
+    private String list_id;
 
-    /** The created at. */
-    private LocalDateTime       created_at;
+    /**
+     * The created at.
+     */
+    private LocalDateTime created_at;
 
-    /** The updated at. */
-    private LocalDateTime       updated_at;
+    /**
+     * The updated at.
+     */
+    private LocalDateTime updated_at;
 
-    /** The member count. */
-    private int                 member_count;
+    /**
+     * The member count.
+     */
+    private int member_count;
 
-    /** The options. */
-    private Options             options;
+    /**
+     * The options.
+     */
+    private Options options;
 
-    /** The connection. */
+    /**
+     * The connection.
+     */
     private MailChimpConnection connection;
 
     /**
@@ -61,8 +78,8 @@ public class Segment extends MailchimpObject {
      * @param jsonRepresentation the json representation
      */
     public Segment(int id, String name, String list_id, SegmentType type, LocalDateTime created_at,
-            LocalDateTime updated_at, int member_count, Options options, MailChimpConnection connection,
-            JSONObject jsonRepresentation) {
+                   LocalDateTime updated_at, int member_count, Options options, MailChimpConnection connection,
+                   JSONObject jsonRepresentation) {
         super(String.valueOf(id), jsonRepresentation);
         this.name = name;
         this.list_id = list_id;
@@ -93,11 +110,11 @@ public class Segment extends MailchimpObject {
      * @throws Exception the exception
      */
     public void addMember(Member member) throws Exception {
-        if (SegmentType.STATIC != (this.getType())) {
+        if (SegmentType.STATIC != ( this.getType() )) {
             throw new SegmentException();
         }
         getConnection().do_Post(new URL(
-                connection.getListendpoint() + "/" + this.getList_id() + "/segments/" + this.getId() + "/members"),
+                        connection.getListendpoint() + "/" + this.getList_id() + "/segments/" + this.getId() + "/members"),
                 member.getJSONRepresentation().toString(), connection.getApikey());
     }
 
@@ -154,13 +171,29 @@ public class Segment extends MailchimpObject {
     }
 
     /**
+     * Update members of a static segment.
+     *
+     * @param name   the name
+     * @param emails the emails
+     * @throws Exception the exception
+     */
+    public void updateMembers(String name, String[] emails) throws Exception {
+        JSONObject segment = new JSONObject();
+        segment.put("name", name);
+        segment.put("static_segment", emails);
+        this.getConnection().do_Patch(new URL(this.connection.getListendpoint() + "/" + this.getList_id() + "/segments/" + this.getId()), segment.toString(),
+                this.connection.getApikey());
+    }
+
+
+    /**
      * Remove a member from this segment, only STATIC segments allowed.
      *
      * @param member the member
      * @throws Exception the exception
      */
     public void removeMember(Member member) throws Exception {
-        if (SegmentType.STATIC != (this.getType())) {
+        if (SegmentType.STATIC != ( this.getType() )) {
             throw new SegmentException();
         }
         getConnection().do_Delete(new URL(connection.getListendpoint() + "/" + this.getList_id() + "/segments/"
@@ -253,7 +286,7 @@ public class Segment extends MailchimpObject {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
@@ -273,14 +306,20 @@ public class Segment extends MailchimpObject {
      */
     public static class Builder {
 
-        /** The name. */
-        private String      name;
+        /**
+         * The name.
+         */
+        private String name;
 
-        /** The type. */
+        /**
+         * The type.
+         */
         private SegmentType type;
 
-        /** The json representation. */
-        private JSONObject  jsonRepresentation = new JSONObject();
+        /**
+         * The json representation.
+         */
+        private JSONObject jsonRepresentation = new JSONObject();
 
         /**
          * Name.

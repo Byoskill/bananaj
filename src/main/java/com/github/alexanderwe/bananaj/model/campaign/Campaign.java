@@ -276,9 +276,11 @@ public class Campaign extends MailchimpObject {
 	 * @throws Exception the exception
 	 */
 	public void pause() throws Exception{
-		final String source = getConnection().do_Get(new URL(connection.getCampaignendpoint() + "/" + this.getId() + "/actions/pause"), connection.getApikey());
-		JSONObject jsonContentFromCall = new JSONObject(source);
-		LOGGER.debug("Pause callback result {}", jsonContentFromCall);
+		final String source = getConnection().do_Post(new URL(connection.getCampaignendpoint() + "/" + this.getId() + "/actions/pause"), connection.getApikey());
+		if (source != null) {
+			JSONObject jsonContentFromCall = new JSONObject(source);
+			LOGGER.debug("Pause callback result {}", jsonContentFromCall);
+		}
 
 	}
 
@@ -288,10 +290,12 @@ public class Campaign extends MailchimpObject {
 	 * @throws Exception the exception
 	 */
 	public void resume() throws Exception{
-		final String source = getConnection().do_Get(new URL(connection.getCampaignendpoint() + "/" + this.getId() + "/actions/resume"),
+		final String source = getConnection().do_Post(new URL(connection.getCampaignendpoint() + "/" + this.getId() + "/actions/resume"),
 				connection.getApikey());
-		JSONObject jsonContentFromCall = new JSONObject(source);
-		LOGGER.debug("Pause callback result {}", jsonContentFromCall);
+		if (source != null) {
+			JSONObject jsonContentFromCall = new JSONObject(source);
+			LOGGER.debug("Pause callback result {}", jsonContentFromCall);
+		}
 
 	}
 
