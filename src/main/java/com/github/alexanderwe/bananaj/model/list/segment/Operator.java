@@ -18,6 +18,7 @@ public enum Operator {
  NOOPEN("noopen"), /** The noclick. */
  NOCLICK("noclick"), /** The nosent. */
  NOSENT("nosent"),
+    DATE_WITHIN("date_within"),
     
     /** The started. */
     STARTED("started"), 

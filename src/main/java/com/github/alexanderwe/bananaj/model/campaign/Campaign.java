@@ -71,7 +71,7 @@ public class Campaign extends MailchimpObject {
 		super(id,jsonRepresentation);
 		this.connection = connection;
 		this.mailChimpList = mailChimpList;
-		this.REPORTENDPOINT = "https://"+this.connection.getServer()+".api.mailchimp.com/3.0/reports/"+this.getId();
+		this.REPORTENDPOINT = "https://"+this.connection.getServer()+".api.mailchimp.com/3.0/templates/"+this.getId();
 		this.campaign_type = campaign_type;
 		this.campaign_status = campaign_status;
 		this.campaignSettings = campaignSettings;
@@ -102,7 +102,7 @@ public class Campaign extends MailchimpObject {
 		if (recipients.has("list_id")) {
 			this.mailChimpList = connection.getList(recipients.getString("list_id"));
 		}
-		this.REPORTENDPOINT = "https://"+this.connection.getServer()+".api.mailchimp.com/3.0/reports/"+this.getId();
+		this.REPORTENDPOINT = "https://"+this.connection.getServer()+".api.mailchimp.com/3.0/templates/"+this.getId();
 		this.campaign_type = CampaignType.valueOf(campaignType.toUpperCase());
 		this.campaign_status = CampaignStatus.valueOf(campaignStatus.toUpperCase());
 		this.campaignSettings = settings;

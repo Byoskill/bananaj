@@ -205,7 +205,7 @@ public class Report extends MailchimpObject{
 	public String toString(){
 		return "Report of campaign: " + this.getId() +" " +this.getCampaign_title() + System.lineSeparator() +
 				"Total emails sent: " + this.getEmails_send_total() + System.lineSeparator() +
-				"Total abuse reports: " + this.getAbuse_report() +  System.lineSeparator() +
+				"Total abuse templates: " + this.getAbuse_report() +  System.lineSeparator() +
 				"Total unsubscribed: " + this.getUnsubscribe_total() + System.lineSeparator() +
 				"Time sent: " + this.getTime_sent() + System.lineSeparator() +
 				"Bounces: " + System.lineSeparator() +
