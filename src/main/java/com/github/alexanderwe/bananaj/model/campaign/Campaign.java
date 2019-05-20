@@ -269,6 +269,34 @@ public class Campaign extends MailchimpObject {
 				this) ;
 	}
 
+
+	/**
+	 * Set the campaign in pause.
+	 *
+	 * @throws Exception the exception
+	 */
+	public void pause() throws Exception{
+		final String source = getConnection().do_Get(new URL(connection.getCampaignendpoint() + "/" + this.getId() + "/actions/pause"), connection.getApikey());
+		JSONObject jsonContentFromCall = new JSONObject(source);
+		LOGGER.debug("Pause callback result {}", jsonContentFromCall);
+
+	}
+
+	/**
+	 * Set the campaign in pause.
+	 *
+	 * @throws Exception the exception
+	 */
+	public void resume() throws Exception{
+		final String source = getConnection().do_Get(new URL(connection.getCampaignendpoint() + "/" + this.getId() + "/actions/resume"),
+				connection.getApikey());
+		JSONObject jsonContentFromCall = new JSONObject(source);
+		LOGGER.debug("Pause callback result {}", jsonContentFromCall);
+
+	}
+
+
+
 	/**
 	 * Gets the campaign settings.
 	 *
