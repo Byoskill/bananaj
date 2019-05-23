@@ -116,7 +116,7 @@ public class MailchimpClickStatsRepository {
         final ObjectMapper objectMapper = initObjectMapper();
 
         log.info("Loading the list of templates");
-        final JsonNode reportsNode = Objects.requireNonNull(body).get("faveeo/mailchimp/reports");
+        final JsonNode reportsNode = Objects.requireNonNull(body).get("/mailchimp/reports");
 
         int res = 0;
         for (JsonNode jsonNode : reportsNode) {

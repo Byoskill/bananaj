@@ -8,13 +8,13 @@ import retrofit2.http.Query;
 
 
 public interface MailchimpReportClient {
-    @GET("faveeo/mailchimp/reports")
+    @GET("/mailchimp/reports")
     Call<JsonNode> getReports(@Query("count") Integer count, @Query("offset") final int offset);
 
-    @GET("faveeo/mailchimp/reports/{id}/click-details")
+    @GET("/mailchimp/reports/{id}/click-details")
     Call<JsonNode> getClickDetailsReportCampaign(@Path("id") String reportId, @Query("count") Integer count, @Query("offset") final int offset);
 
-    @GET("faveeo/mailchimp/reports/{id}/click-details/{clickId}/members")
+    @GET("/mailchimp/reports/{id}/click-details/{clickId}/members")
     Call<JsonNode> getMembersPerClicksReportCampaign(@Path("id") String reportId,
                                                      @Path("clickId") String clickId,
                                                      @Query("count") Integer count,
