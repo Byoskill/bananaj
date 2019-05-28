@@ -1,5 +1,7 @@
-package com.faveeo.mailchimp.reports;
+package com.faveeo.mailchimp;
 
+import com.faveeo.mailchimp.reports.AuthenticationInterceptor;
+import com.faveeo.mailchimp.reports.MailchimpReportClient;
 import com.faveeo.mailchimp.templates.MailchimpTemplateClient;
 import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
 import okhttp3.OkHttpClient;
@@ -12,13 +14,13 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 
-public class MailchimpConfiguration {
+public class MailchimpAPI {
 
     public static final String URL = "https://us13.api.mailchimp.com/3.0/";
-    private static final Logger log = LoggerFactory.getLogger(MailchimpConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(MailchimpAPI.class);
     private String key;
 
-    public MailchimpConfiguration() {
+    public MailchimpAPI() {
         super();
     }
 
