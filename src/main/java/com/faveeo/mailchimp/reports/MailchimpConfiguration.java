@@ -1,6 +1,7 @@
 package com.faveeo.mailchimp.reports;
 
 import com.faveeo.mailchimp.templates.MailchimpTemplateClient;
+import com.github.alexanderwe.bananaj.connection.MailChimpConnection;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.slf4j.Logger;
@@ -27,6 +28,15 @@ public class MailchimpConfiguration {
 
     public void setKey(final String key) {
         this.key = key;
+    }
+
+    /**
+     * New mailchimp connection mail chimp connection.
+     *
+     * @return the mail chimp connection
+     */
+    public MailChimpConnection newMailchimpConnection() {
+        return new MailChimpConnection(key);
     }
 
     /**

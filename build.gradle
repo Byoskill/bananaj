@@ -10,7 +10,7 @@ apply plugin: 'signing'
 
 
 description = 'A simple MailChimp API wrapper written in Java'
-version = "0.7.2"
+version = "0.7.4"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
