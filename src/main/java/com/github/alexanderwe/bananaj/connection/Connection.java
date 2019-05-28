@@ -203,7 +203,7 @@ public class Connection implements AutoCloseable {
 
             int responseCode = response.getStatusLine().getStatusCode();
             if (responseCode < 200 || responseCode > 299) {
-                throw buildTransportError("DELETE", url.toExternalForm(), response);
+                throw buildTransportError("PUT", url.toExternalForm(), response);
             }
 
             return createResponseFromEntity(response.getEntity());
