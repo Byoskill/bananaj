@@ -86,7 +86,7 @@ public class Campaign extends MailchimpObject {
         this.campaign_type = campaign_type;
         this.campaign_status = campaign_status;
         this.campaignSettings = campaignSettings;
-        
+
     }
 
     /**
@@ -114,11 +114,7 @@ public class Campaign extends MailchimpObject {
         this.campaign_type = CampaignType.valueOf(campaignType.toUpperCase());
         this.campaign_status = CampaignStatus.valueOf(campaignStatus.toUpperCase());
         this.campaignSettings = settings;
-        try {
-            setContent();
-        } catch (Exception e) {
-            LOGGER.error("Could not create unmarshall the campaign object", e);
-        }
+
     }
 
     /**
