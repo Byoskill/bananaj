@@ -272,7 +272,7 @@ public class Campaign extends MailchimpObject {
     public void changeHTMLContent(String htmlContent) throws Exception{
         JSONObject jsonContent = new JSONObject();
         jsonContent.put("html", htmlContent);
-        final URL contentUpdateUrl = new URL(getConnection().getCampaignendpoint() + "/" + getId() + "/jsonContent");
+        final URL contentUpdateUrl = new URL(getConnection().getCampaignendpoint() + "/" + getId() + "/content");
         String response = getConnection().do_Put(contentUpdateUrl,jsonContent.toString(), getConnection().getApikey());
         jsonContent = new JSONObject(response);
         final String plain_text = jsonContent.has("plain_text") ? jsonContent.getString("plain_text") : null;
