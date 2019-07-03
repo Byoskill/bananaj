@@ -13,12 +13,45 @@ bananaj provides an Java wrapper for the MailChimp API 3.0. It is possible acces
 This is still in alpha. If you encounter some bugs or issues, please feel free to report them to the [Issues section](https://github.com/alexanderwe/bananaj/issues).
 
 Add this dependency to your pom.xml to use **bananaj** in your project.
+
 ```
-<dependency>
-  <groupId>com.github.alexanderwe</groupId>
-  <artifactId>bananaj</artifactId>
-  <version>0.5.1</version>
-</dependency>
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'
+          xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    
+    <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-sleroy-maven</id>
+                    <name>bintray</name>
+                    <url>https://dl.bintray.com/sleroy/maven</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-sleroy-maven</id>
+                    <name>bintray-plugins</name>
+                    <url>https://dl.bintray.com/sleroy/maven</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>bintray</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>bintray</activeProfile>
+    </activeProfiles>
+</settings>
+```
+
+```
+<dependency> <groupId>com.github.byoskill</groupId> <artifactId>bananaj</artifactId> <version>0.7.6</version> <type>pom</type> </dependency>
 ```
 or with Gradle
 
@@ -28,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.github.alexanderwe', name: 'bananaj', version: '0.5.1'
+    compile group: 'com.github.byoskill', name: 'bananaj', version: '0.7.6'
 }
 ```
 
